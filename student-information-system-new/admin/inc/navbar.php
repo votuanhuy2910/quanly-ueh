@@ -9,32 +9,56 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0"
         id="navLinks">
+
         <li class="nav-item">
           <a class="nav-link"
             aria-current="page"
-            href="index.php">Home</a>
+            href="index.php">Trang chủ</a>
         </li>
+
         <li class="nav-item">
-          <a class="nav-link" href="../other.php">Sign Out</a>
+          <a class="nav-link" href="student.php">Thống kê số lượng hồ sơ</a>
         </li>
+
         <li class="nav-item">
-          <a class="nav-link" href="student.php">Students</a>
+          <a class="nav-link" href="course-k51.php">K51</a>
         </li>
-        <!-- <li class="nav-item">
-          <a class="nav-link" href="teacher.php">Teachers</a>
-        </li>
+
         <li class="nav-item">
-          <a class="nav-link" href="course-add.php">Course Registration</a>
+          <a class="nav-link" href="course-k50.php">K50</a>
         </li>
+
         <li class="nav-item">
-          <a class="nav-link" href="add_fee.php">Fees</a>
+          <a class="nav-link" href="course-k49.php">K49</a>
         </li>
+
         <li class="nav-item">
-          <a class="nav-link" href="message.php">Message</a>
+          <a class="nav-link" href="course-k48.php">K48</a>
         </li>
+
         <li class="nav-item">
-          <a class="nav-link" href="settings.php">Settings</a>
-        </li> -->
+          <a class="nav-link" href="course-k47.php">K47</a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link" href="course-k46.php">K46</a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link" href="course-k45.php">K45</a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link" href="course-k44.php">K44</a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link" href="course-k43.php">K43</a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link" href="../index.php">Đăng xuất</a>
+        </li>
       </ul>
     </div>
   </div>

@@ -8,110 +8,75 @@ if (
   if ($_SESSION['role'] == 'Admin') {
     include "../DB_connection.php";
     include "data/student.php";
-    include "data/res_std_course.php";
-    include "data/fee.php";
-    
-   
+    // include "data/res_std_course.php";
+    // include "data/fee.php";
+
+
 
     if (isset($_GET['student_id'])) {
 
       $student_id = $_GET['student_id'];
 
       $student = getStudentById($student_id, $conn);
-      $fee = getFeeOfStudent($conn, $student_id);
-      if ($fee == null) {
-        $fee = 0;
-      }
+      // $fee = getFeeOfStudent($conn, $student_id);
+      // if ($fee == null) {
+      //   $fee = 0;
+      // }
 ?>
-<?php
+      <?php
       include "req/header.php";
       ?>
 
-<body>
-    <?php
+      <body>
+        <?php
         include "inc/navbar.php";
         if ($student != 0) {
         ?>
-    <div class="container mt-5">
-        <div class="d-flex justify-content-center align-items-center">
-            <div class="card w-50 mb-5 justify-content-center align-items-center">
+          <div class="container mt-5">
+            <div class="d-flex justify-content-center align-items-center">
+              <div class="card w-50 mb-5 justify-content-center align-items-center">
                 <div class="w-25 mt-5">
-                    <img src="../img/student-<?= $student['gender'] ?>.png" class="card-img-top" alt="...">
+                  <img src="../img/student-<?= $student['gender'] ?>.png" class="card-img-top" alt="...">
                 </div>
+
                 <div class="card-body w-75">
-                    <h5 class="card-title text-center">@<?= $student['username'] ?></h5>
+                  <h5 class="card-title text-center"><?= $student['fname'] . " " . $student['lname'] ?></h5>
                 </div>
+
                 <div class="card-body w-100">
-                    <ul class="list-group list-group-flush ">
-                        <li class="list-group-item">ID: <?= $student['student_id'] ?></li>
-                        <li class="list-group-item">Name: <?= $student['fname'] . " " . $student['lname'] ?></li>
-                        <li class="list-group-item">Username: <?= $student['username'] ?></li>
-                        <li class="list-group-item">Address: <?= $student['address'] ?></li>
-                        <li class="list-group-item">Date of birth: <?= $student['date_of_birth'] ?></li>
-                        <li class="list-group-item">Email address: <?= $student['email_address'] ?></li>
-                        <li class="list-group-item">Gender: <?= $student['gender'] ?></li>
-                        <li class="list-group-item">Department: <?= $student['department'] ?></li>
-                        <li class="list-group-item">Semester: <?= $student['semester'] ?></li>
-                        <li class="list-group-item">Year: <?= $student['year'] ?></li>
-                        <li class="list-group-item">Intake: <?= $student['intake'] ?></li>
-                        <li class="list-group-item">Section: <?= $student['section'] ?></li>
-                        <li class="list-group-item">Parent name:
-                            <?= $student['parent_fname'] . " " . $student['parent_lname'] ?></li>
-                        <li class="list-group-item">Parent phone number: <?= $student['parent_phone_number'] ?></li>
-                        <li class="list-group-item">Register Courses:
-                            <?php
-                              // Get courses for the teacher
-                            $courses = getStudentCourse($conn, $student['student_id']);
-
-                              // Display course names
-                            if ($courses) {
-                                  echo "<ul>"; // Start unordered list
-                                  foreach ($courses as $course) {
-                                      echo "<li>" . $course['courseTitle'] . "</li>"; // Display each course name
-                                  }
-                                  echo "</ul>"; // End unordered list
-                            } else {
-                                  echo "0";
-                            }
-                            ?>
-
-                        </li>
-                        <li class="list-group-item">Complete Courses:
-                          <?php
-                            
-                            $competeCourses = getStudentCompleteCourse($conn, $student['student_id']);
-                            echo htmlspecialchars($competeCourses);
-                            ?>
-
-                        </li>
-                        <li class="list-group-item">Demand: <?= $fee ?></li>
-                        <li class="list-group-item">Cgpa: <? ?></li>
-                    </ul>
+                  <ul class="list-group list-group-flush ">
+                    <li class="list-group-item">ID Nhập học: <?= $student['admission_num'] ?></li>
+                    <li class="list-group-item">MSSV: <?= $student['mssv'] ?></li>
+                    <li class="list-group-item">Ngày sinh: <?= date('d-m-Y', strtotime($student['date_of_birth'])) ?></li>
+                    <li class="list-group-item">Giới tính: <?= $student['gender'] ?></li>
+                    <li class="list-group-item">Khóa: <?= $student['course'] ?></li>
+                    <li class="list-group-item">Tình trạng: <?= $student['status'] ?></li>
+                  </ul>
                 </div>
 
                 <div class="card-body">
-                    <a href="student.php" class="card-link btn bg-primary text-white">Go Back</a>
+                  <a href="student.php" class="card-link btn bg-primary text-white">Quay lại</a>
                 </div>
+              </div>
             </div>
-        </div>
-    </div>
-    <?php
+          </div>
+        <?php
         } else {
-          header("Location: teacher.php");
+          header("Location: student.php");
           exit;
         }
         ?>
 
-    <script src="../js/bootstrap.bundle.min.js"></script>
-    <script>
-    $(document).ready(function() {
-        $("#navLinks li:nth-child(3) a").addClass('active');
-    });
-    </script>
+        <script src="../js/bootstrap.bundle.min.js"></script>
+        <script>
+          // $(document).ready(function() {
+          //   $("#navLinks li:nth-child(3) a").addClass('active');
+          // });
+        </script>
 
-</body>
+      </body>
 
-</html>
+      </html>
 <?php
 
     } else {
@@ -119,11 +84,11 @@ if (
       exit;
     }
   } else {
-    header("Location: ../login.php");
+    header("Location: ../index.php");
     exit;
   }
 } else {
-  header("Location: ../login.php");
+  header("Location: ../index.php");
   exit;
 }
 

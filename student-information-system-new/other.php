@@ -1,10 +1,11 @@
-
 <?php
-	 include "req/header.php";
+include "req/header.php";
+header("Location: index.php");
+exit;
 ?>
-<body class="body-login">
+<!-- <body class="body-login">
 <?php
-        include "inc/navbar.php";?>
+include "inc/navbar.php"; ?>
     <div class="black-fill"><br /> <br />
     	<div class="d-flex justify-content-center align-items-center flex-column">
     	<form class="login" 
@@ -18,7 +19,7 @@
     		<h3>SIGN IN</h3>
     		<?php if (isset($_GET['error'])) { ?>
     		<div class="alert alert-danger" role="alert">
-			  <?=$_GET['error']?>
+			  <?= $_GET['error'] ?>
 			</div>
 			<?php } ?>
 		  <div class="mb-3">
@@ -57,4 +58,4 @@
     </div>
     <script src="js/bootstrap.bundle.min.js"></script>		
 </body>
-</html>
+</html> -->

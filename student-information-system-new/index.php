@@ -187,33 +187,33 @@ if ($admin != 0) {
                         <img src="logo.png"
                             width="100">
                     </div> -->
-                    <h3>SIGN IN</h3>
+                    <h3>ĐĂNG NHẬP</h3>
                     <?php if (isset($_GET['error'])) { ?>
                         <div class="alert alert-danger" role="alert">
                             <?= $_GET['error'] ?>
                         </div>
                     <?php } ?>
                     <div class="mb-3">
-                        <label class="form-label">Username</label>
+                        <label class="form-label">Tài khoản:</label>
                         <input type="text"
                             class="form-control"
                             name="uname">
                     </div>
 
                     <div class="mb-3">
-                        <label class="form-label">Password</label>
+                        <label class="form-label">Mật khẩu:</label>
                         <input type="password"
                             class="form-control"
                             name="pass">
                     </div>
 
                     <div class="mb-3">
-                        <label class="form-label">Sign In As</label>
+                        <label class="form-label">Đăng nhập với:</label>
                         <select class="form-control"
                             name="role">
                             <option value="1">Admin</option>
-                            <option value="2">Teacher</option>
-                            <option value="4" hidden>Registrar Office</option>
+                            <!-- <option value="2">Teacher</option> -->
+                            <!-- <option value="4" hidden>Registrar Office</option> -->
                         </select>
                     </div>
 
@@ -221,8 +221,8 @@ if ($admin != 0) {
                 </form>
 
                 <br /><br />
-                <div class="text-center text-light">
-                    Copyright &copy; 2022 Bubt annex. All rights reserved.
+                <div class="text-center">
+                    Copyright &copy; 2025 VTH-UEH
                 </div>
 
             </div>
@@ -234,6 +234,6 @@ if ($admin != 0) {
     </html>
 <?php
 } else {
-    header("Location: login.php");
+    header("Location: index.php");
     exit;
 }  ?>

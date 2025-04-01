@@ -12,7 +12,6 @@ if (
 
       $id = $_GET['student_id'];
       if (removeStudent($id, $conn)) {
-         echo "<script>alert('Xóa thành công!');</script>";
          $sm = "Xóa thành công!";
          header("Location: student.php?success=$sm");
          exit;

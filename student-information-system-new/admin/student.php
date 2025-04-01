@@ -55,7 +55,7 @@ if (
             <table style="border-collapse: collapse; width: 30%; margin-bottom: 2rem;">
               <thead>
                 <tr>
-                  <th style="border: 1px solid #ddd; padding: 8px;">Trạng thái hồ sơ</th>
+                  <th style="border: 1px solid #ddd; padding: 8px;">Trạng thái</th>
                   <th style="border: 1px solid #ddd; padding: 8px;">Số lượng (Hồ sơ)</th>
                 </tr>
               </thead>
@@ -82,7 +82,7 @@ if (
               "<thead>
                 <tr>
                   <th style='border: 1px solid #ddd; padding: 8px;'>Tình trạng</th>
-                  <th style='border: 1px solid #ddd; padding: 8px;'>Số lượng (Hồ sơ)</th>
+                  <th style='border: 1px solid #ddd; padding: 8px;'>Số lượng (Sinh viên)</th>
                 </tr>
               </thead>"; // Tiêu đề bảng
 
@@ -145,12 +145,12 @@ if (
           <div class="table-responsive">
             <table class="table table-bordered mt-3 n-table" style="max-width: 1600px;">
               <thead>
-                <tr>
+                <tr style="text-align: center;">
                   <th scope="col">STT</th>
                   <th scope="col">ID Nhập học</th>
                   <th scope="col">MSSV</th>
                   <th scope="col">Họ và tên</th>
-                  <th scope="col">Username</th>
+                  <!-- <th scope="col">Username</th> -->
                   <th scope="col">Ngày sinh</th>
                   <th scope="col">Khoá học</th>
                   <th scope="col">Giới tính</th>
@@ -170,9 +170,9 @@ if (
                 ?>
                   <tr>
 
-                    <td><?= $student['student_id'] ?></td>
-                    <td><?= $student['admission_num'] ?></td>
-                    <td><?= $student['mssv'] ?></td>
+                    <td style="text-align: center;"><?= $student['student_id'] ?></td>
+                    <td style="text-align: center;"><?= $student['admission_num'] ?></td>
+                    <td style="text-align: center;"><?= $student['mssv'] ?></td>
                     <td>
                       <a href="student-view.php?student_id=<?= $student['student_id'] ?>" style="text-decoration: none;">
                         <?= $student['fname'] . '&nbsp' . $student['lname'] ?>
@@ -180,10 +180,10 @@ if (
                     </td>
 
 
-                    <td><?= $student['username'] ?></td>
-                    <td><?= date('d-m-Y', strtotime($student['date_of_birth'])) ?></td>
-                    <td><?= $student['course'] ?></td>
-                    <td><?= $student['gender'] ?></td>
+                    <!-- <td><?= $student['username'] ?></td> -->
+                    <td style="text-align: center;"><?= date('d-m-Y', strtotime($student['date_of_birth'])) ?></td>
+                    <td style="text-align: center;"><?= $student['course'] ?></td>
+                    <td style="text-align: center;"><?= $student['gender'] ?></td>
                     <td><?= $student['status'] ?></td>
                     <td><?= $student['note'] ?></td>
 
@@ -208,7 +208,7 @@ if (
         <script src="../js/bootstrap.bundle.min.js"></script>
         <script>
           $(document).ready(function() {
-            $("#navLinks li:nth-child(3) a").addClass('active');
+            $("#navLinks li:nth-child(2) a").addClass('active');
           });
         </script>
 

@@ -13,8 +13,8 @@ if (
         $mssv = '';
         $fname = '';
         $lname = '';
-        $uname = '';
-        $khoahoc = '';
+        // $uname = '';
+        $course = '';
         $status = '';
         $note = '';
 
@@ -22,8 +22,8 @@ if (
         if (isset($_GET['mssv'])) $mssv = $_GET['mssv'];
         if (isset($_GET['fname'])) $fname = $_GET['fname'];
         if (isset($_GET['lname'])) $lname = $_GET['lname'];
-        if (isset($_GET['uname'])) $uname = $_GET['uname'];
-        if (isset($_GET['khoahoc'])) $khoahoc = $_GET['khoahoc'];
+        // if (isset($_GET['uname'])) $uname = $_GET['uname'];
+        if (isset($_GET['course'])) $course = $_GET['course'];
         if (isset($_GET['status'])) $status = $_GET['status'];
         if (isset($_GET['note'])) $note = $_GET['note'];
 ?>
@@ -86,18 +86,18 @@ if (
 
                     <div class="mb-3">
                         <label class="form-label">Khoá học</label>
-                        <select class="form-control" name="khoahoc">
+                        <select class="form-control" name="course">
                             <?php
                             $courseList = array("K51", "K50", "K49", "K48", "K47", "K46", "K45", "K44", "K43");
-                            foreach ($courseList as $khoahoc) {
-                                echo "<option value='$khoahoc'>$khoahoc</option>";
+                            foreach ($courseList as $course) {
+                                echo "<option value='$course'>$course</option>";
                             }
                             ?>
                         </select>
                     </div>
                     <hr>
 
-                    <div class="mb-3">
+                    <!-- <div class="mb-3">
                         <label class="form-label">Username</label>
                         <input type="text" class="form-control" value="<?= $uname ?>" name="username">
                     </div>
@@ -110,8 +110,9 @@ if (
                                 Random</button>
                         </div>
 
-                    </div><br>
-                    <hr>
+                    </div>
+                    <br>
+                    <hr> -->
 
                     <div class="mb-3">
                         <label class="form-label">Tình trạng</label>
@@ -137,9 +138,9 @@ if (
 
             <script src="../js/bootstrap.bundle.min.js"></script>
             <script>
-                $(document).ready(function() {
-                    $("#navLinks li:nth-child(3) a").addClass('active');
-                });
+                // $(document).ready(function() {
+                //     $("#navLinks li:nth-child(3) a").addClass('active');
+                // });
 
                 function makePass(length) {
                     var result = '';

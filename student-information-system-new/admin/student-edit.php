@@ -100,13 +100,13 @@ if (
               name="gender"> Nữ
           </div>
 
-          <div class="mb-3">
+          <!-- <div class="mb-3">
             <label class="form-label">Username</label>
             <input type="text"
               class="form-control"
               value="<?= $student['username'] ?>"
               name="username">
-          </div>
+          </div> -->
           <div class="mb-3">
             <label class="form-label">Khóa học</label>
             <select class="form-control" name="course">
@@ -206,13 +206,13 @@ if (
 
       <script src="../js/bootstrap.bundle.min.js"></script>
       <script>
-        $(document).ready(function() {
-          $("#navLinks li:nth-child(3) a").addClass('active');
-        });
+        // $(document).ready(function() {
+        //   $("#navLinks li:nth-child(3) a").addClass('active');
+        // });
 
         function makePass(length) {
           var result = '';
-          var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+          var characters = '!@#$%&*ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
           var charactersLength = characters.length;
           for (var i = 0; i < length; i++) {
             result += characters.charAt(Math.floor(Math.random() *

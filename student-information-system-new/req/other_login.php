@@ -15,15 +15,15 @@ if (
 
 	if (empty($uname)) {
 		$em  = "Username is required";
-		header("Location: ../other.php?error=$em");
+		header("Location: ../index.php?error=$em");
 		exit;
 	} else if (empty($pass)) {
 		$em  = "Password is required";
-		header("Location: ../other.php?error=$em");
+		header("Location: ../index.php?error=$em");
 		exit;
 	} else if (empty($role)) {
 		$em  = "An error Occurred";
-		header("Location: ../other.php?error=$em");
+		header("Location: ../index.php?error=$em");
 		exit;
 	} else {
 
@@ -78,26 +78,26 @@ if (
 						exit;
 					} else {
 						$em  = "Incorrect Username or Password";
-						header("Location: ../other.php?error=$em");
+						header("Location: ../index.php?error=$em");
 						exit;
 					}
 				} else {
 					$em  = "Incorrect Username or Password";
-					header("Location: ../other.php?error=$em");
+					header("Location: ../index.php?error=$em");
 					exit;
 				}
 			} else {
 				$em  = "Incorrect Username or Password";
-				header("Location: ../other.php?error=$em");
+				header("Location: ../index.php?error=$em");
 				exit;
 			}
 		} else {
 			$em  = "Incorrect Username or Password";
-			header("Location: ../other.php?error=$em");
+			header("Location: ../index.php?error=$em");
 			exit;
 		}
 	}
 } else {
-	header("Location: ../other.php");
+	header("Location: ../index.php");
 	exit;
 }

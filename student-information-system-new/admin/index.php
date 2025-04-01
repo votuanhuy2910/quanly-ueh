@@ -20,7 +20,7 @@ if (
                     <div class="row row-cols-4">
                         <a href="student.php" class="col btn btn-dark m-2 py-3">
                             <i class="fa fa-graduation-cap fs-1" aria-hidden="true"></i><br>
-                            Students
+                            Thống kê số lượng hồ sơ
                         </a>
                         <!-- <a href="teacher.php" class="col btn btn-dark m-2 py-3">
                             <i class="fa fa-user-md fs-1" aria-hidden="true"></i><br>
@@ -45,7 +45,7 @@ if (
                         </a> -->
                         <a href="../logout.php" class="col btn btn-warning m-2 py-3">
                             <i class="fa fa-sign-out fs-1" aria-hidden="true"></i><br>
-                            Sign Out
+                            Đăng xuất
                         </a>
                     </div>
                 </div>
