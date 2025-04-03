@@ -22,27 +22,6 @@ if (
                             <i class="fa fa-graduation-cap fs-1" aria-hidden="true"></i><br>
                             Thống kê số lượng hồ sơ
                         </a>
-                        <!-- <a href="teacher.php" class="col btn btn-dark m-2 py-3">
-                            <i class="fa fa-user-md fs-1" aria-hidden="true"></i><br>
-                            Teachers
-                        </a>
-                        <a href="add_fee.php" class="col btn btn-dark m-2 py-3">
-                            <i class="fa-solid fa-comment-dollar fs-1" aria-hidden="true"></i><br>
-                            Add Fee
-                        </a>
-
-                        <a href="course-add.php" class="col btn btn-dark m-2 py-3">
-                            <i class="fa fa-book fs-1" aria-hidden="true"></i><br>
-                            Course Registration
-                        </a>
-                        <a href="message.php" class="col btn btn-dark m-2 py-3">
-                            <i class="fa fa-envelope fs-1" aria-hidden="true"></i><br>
-                            Message
-                        </a>
-                        <a href="settings.php" class="col btn btn-dark m-2 py-3">
-                            <i class="fa fa-cogs fs-1" aria-hidden="true"></i><br>
-                            Settings
-                        </a> -->
                         <a href="../logout.php" class="col btn btn-warning m-2 py-3">
                             <i class="fa fa-sign-out fs-1" aria-hidden="true"></i><br>
                             Đăng xuất

@@ -44,14 +44,6 @@ if (
         ?>
           <div class="container mt-5">
             <a href="student.php" class="btn btn-dark">Quay lại</a>
-            <!-- <form action="student-search.php" class="mt-3 n-table" method="post">
-              <div class="input-group mb-3">
-                <input type="text" class="form-control" name="searchKey" placeholder="Search...">
-                <button class="btn btn-primary">
-                  <i class="fa fa-search" aria-hidden="true"></i>
-                </button>
-              </div>
-            </form> -->
 
             <?php if (isset($_GET['error'])) { ?>
               <div class="alert alert-danger mt-3 n-table" role="alert">
@@ -86,10 +78,6 @@ if (
                   <?php
                   foreach ($students as $student) {
                     $std_id = $student['student_id'];
-                    // $fee = getFeeOfStudent($conn, $std_id);
-                    // if ($fee == null) {
-                    //   $fee = 0;
-                    // }
                   ?>
                     <tr>
                       <td style="text-align: center;"><?= $student['student_id'] ?></td>
@@ -101,7 +89,6 @@ if (
                         </a>
                       </td>
 
-
                       <td style="text-align: center;">
                         <?= date('d-m-Y', strtotime($student['date_of_birth'])) ?>
                       </td>
@@ -110,11 +97,6 @@ if (
                       <td><?= $student['status'] ?></td>
                       <td><?= $student['note'] ?></td>
 
-                      <!-- <td style="display: flex; align-items: center; justify-content: space-evenly;"> -->
-                      <!-- <a href="student-edit.php?student_id=<?= $student['student_id'] ?>" class="btn btn-warning">Edit</a>
-                        <a href="student-delete.php?student_id=<?= $student['student_id'] ?>" class="btn btn-danger">Delete</a> -->
-                      <!-- <a href="student.php" class="btn btn-dark">Quay lại</a> -->
-                      <!-- </td> -->
                     </tr>
                   <?php } ?>
                 </tbody>

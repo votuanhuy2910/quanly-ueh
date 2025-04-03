@@ -1,0 +1,188 @@
+<?php
+session_start();
+if (
+    isset($_SESSION['admin_id']) &&
+    isset($_SESSION['role'])
+) {
+
+    if ($_SESSION['role'] == 'Admin') {
+        include "../DB_connection.php";
+        include "data/student.php";
+
+        $students = getAllStudents($conn);
+
+        // Tính số hồ sơ đã trả
+        $sql = "SELECT * FROM students";
+        $stmt = $conn->query($sql);
+
+        $count = 0;
+
+        if ($stmt->rowCount() > 0) {
+            while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                // Truy cập dữ liệu theo tên cột
+                // echo $row["note"];
+                $note = $row['note'];
+                if (is_string($note) && !empty($note)) {
+                    $count++;
+                }
+            }
+        }
+        // close
+
+        $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+        // Truy vấn SQL để đếm số lượng từng trạng thái
+        $sql1 = "SELECT status, COUNT(*) as count FROM students GROUP BY status";
+        $stmt1 = $conn->prepare($sql1);
+        $stmt1->execute();
+
+        // Lấy kết quả dưới dạng mảng kết hợp
+        $result1 = $stmt1->fetchAll(PDO::FETCH_ASSOC);
+        // In kết quả ra màn hình
+?>
+        <?php
+        include "req/header.php";
+        ?>
+
+        <body>
+            <?php
+            include "inc/navbar.php";
+            if ($students != 0) {
+            ?>
+                <div class="container mt-5">
+                    <nav>
+                        <div style="display: flex; align-items: center; align-content: center; flex-wrap: wrap; flex-direction: column-reverse; margin-bottom: 2rem;">
+                            <div>
+                                <a href="#" class="btn btn-primary mt-3">Import Excel</a>
+                                <a href="#" class="btn btn-success mt-3">Export Excel</a>
+                            </div>
+
+                            <a href="k51-student-add.php" class="btn btn-dark mt-3">Thêm sinh viên mới</a>
+
+                            <form action="k51-student-search.php" class="n-table" method="get" style="width: 100%;">
+                                <div class="input-group mb-3">
+                                    <input type="text" class="form-control" name="searchKey" placeholder="Search...">
+                                    <button class="btn btn-primary">
+                                        <i class="fa fa-search" aria-hidden="true"></i>
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </nav>
+
+                    <hr>
+
+                    <?php if (isset($_GET['error'])) { ?>
+                        <div class="alert alert-danger mt-3 n-table" role="alert">
+                            <?= $_GET['error'] ?>
+                        </div>
+                    <?php } ?>
+
+                    <?php if (isset($_GET['success'])) { ?>
+                        <div class="alert alert-info mt-3 n-table" role="alert">
+                            <?= $_GET['success'] ?>
+                        </div>
+                    <?php } ?>
+
+                    <?php
+                    // Pagination logic
+                    $limit = 50; // Number of records per page
+                    $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
+                    $start = ($page - 1) * $limit;
+
+                    // Fetch limited students for the current page
+                    $sql_paginated = "SELECT * FROM students LIMIT $start, $limit";
+                    $stmt_paginated = $conn->prepare($sql_paginated);
+                    $stmt_paginated->execute();
+                    $students_paginated = $stmt_paginated->fetchAll(PDO::FETCH_ASSOC);
+
+                    // Get total number of students for pagination
+                    $sql_total = "SELECT COUNT(*) as total FROM students";
+                    $stmt_total = $conn->prepare($sql_total);
+                    $stmt_total->execute();
+                    $total_students = $stmt_total->fetch(PDO::FETCH_ASSOC)['total'];
+
+                    $total_pages = ceil($total_students / $limit);
+
+                    if ($students_paginated) {
+                        echo "<table class='table table-bordered mt-3 n-table' style='max-width: 1600px;'>";
+                        echo "<thead>
+                  <tr style='text-align: center;'>
+                  <th scope='col'>STT</th>
+                  <th scope='col'>ID Nhập học</th>
+                  <th scope='col'>MSSV</th>
+                  <th scope='col'>Họ và tên</th>
+                  <th scope='col'>Ngày sinh</th>
+                  <th scope='col'>Khoá học</th>
+                  <th scope='col'>Giới tính</th>
+                  <th scope='col'>Tình trạng</th>
+                  <th scope='col'>Lý do <br> (đã rút hồ sơ)</th>
+                  <th scope='col'>Action</th>
+                  </tr>
+                </thead>";
+                        echo "<tbody>";
+                        foreach ($students_paginated as $student) {
+                            echo "<tr>
+                  <td style='text-align: center;'>{$student['student_id']}</td>
+                  <td style='text-align: center;'>{$student['admission_num']}</td>
+                  <td style='text-align: center;'>{$student['mssv']}</td>
+                  <td><a href='k51-student-view.php?student_id={$student['student_id']}' style='text-decoration: none; text-transform: capitalize;'>{$student['fname']} {$student['lname']}</a></td>
+                  <td style='text-align: center;'>" . date('d-m-Y', strtotime($student['date_of_birth'])) . "</td>
+                  <td style='text-align: center;'>{$student['course']}</td>
+                  <td style='text-align: center;'>{$student['gender']}</td>
+                  <td>{$student['status']}</td>
+                  <td>{$student['note']}</td>
+                  <td style='display: flex; align-items: center; justify-content: space-evenly;'>
+                    <a href='k51-student-edit.php?student_id={$student['student_id']}' class='btn btn-warning'>Edit</a>
+                    <a href='k51-student-delete.php?student_id={$student['student_id']}' class='btn btn-danger'>Delete</a>
+                  </td>
+                  </tr>";
+                        }
+                        echo "</tbody>";
+                        echo "</table>";
+
+                        // Pagination links
+                        echo "<nav aria-label='Page navigation example'>";
+                        echo "<ul class='pagination justify-content-center'>";
+                        for ($i = 1; $i <= $total_pages; $i++) {
+                            $active = $i == $page ? 'active' : '';
+                            echo "<li class='page-item $active'><a class='page-link' href='?page=$i'>$i</a></li>";
+                        }
+                        echo "</ul>";
+                        echo "</nav>";
+                    } else {
+                        echo "<div class='alert alert-info .w-450 m-5' role='alert'>Empty!</div>";
+                    }
+                    ?>
+
+                <?php
+            } else {
+                ?>
+                    <div class="alert alert-info .w-450 m-5" role="alert">
+                        Empty!
+                    </div>
+                <?php } ?>
+                </div>
+
+                <script src="../../js/bootstrap.bundle.min.js"></script>
+                <script>
+                    $(document).ready(function() {
+                        $("#navLinks li:nth-child(3) a").addClass('active');
+                    });
+                </script>
+
+        </body>
+
+        </html>
+<?php
+
+    } else {
+        header("Location: ../login.php");
+        exit;
+    }
+} else {
+    header("Location: ../login.php");
+    exit;
+}
+
+?>

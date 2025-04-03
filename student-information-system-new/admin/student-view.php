@@ -8,20 +8,12 @@ if (
   if ($_SESSION['role'] == 'Admin') {
     include "../DB_connection.php";
     include "data/student.php";
-    // include "data/res_std_course.php";
-    // include "data/fee.php";
-
-
 
     if (isset($_GET['student_id'])) {
 
       $student_id = $_GET['student_id'];
 
       $student = getStudentById($student_id, $conn);
-      // $fee = getFeeOfStudent($conn, $student_id);
-      // if ($fee == null) {
-      //   $fee = 0;
-      // }
 ?>
       <?php
       include "req/header.php";

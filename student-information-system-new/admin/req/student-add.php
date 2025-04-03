@@ -61,16 +61,7 @@ if (
                 header("Location: ../student-add.php?error=$em&$data");
                 exit;
             }
-            // else if (empty($mssv)) {
-            //     $em  = "MSSV không được bỏ trống";
-            //     header("Location: ../student-add.php?error=$em&$data");
-            //     exit;
-            // } else if (!unameIsUnique($mssv, $admission_num, $conn)) {
-            //     $em  = "MSSV đã tồn tại";
-            //     header("Location: ../student-add.php?error=$em&$data");
-            //     exit;
-            // }
-            // else 
+
             if (empty($fname)) {
                 $em  = "First name không được bỏ trống";
                 header("Location: ../student-add.php?error=$em&$data");
@@ -95,18 +86,12 @@ if (
                 $em  = "Status không được bỏ trống";
                 header("Location: ../student-add.php?error=$em&$data");
                 exit;
-            }
-            // else if ($note) {
-            //     $em  = "Note is required";
-            //     header("Location: ../student-add.php?error=$em&$data");
-            //     exit;
-            // } 
-            else {
+            } else {
                 // hashing the password
                 // $pass = password_hash($pass, PASSWORD_DEFAULT);
                 $sql  = "INSERT INTO
-                 students(admission_num, mssv, fname, lname, date_of_birth, course, gender, status, note)
-                 VALUES(?,?,?,?,?,?,?,?,?)";
+                students(admission_num, mssv, fname, lname, date_of_birth, course, gender, status, note)
+                VALUES(?,?,?,?,?,?,?,?,?)";
                 $stmt = $conn->prepare($sql);
                 $stmt->execute([$admission_num, $mssv, $fname, $lname, $date_of_birth, $course, $gender, $status, $note]);
                 $sm = "Thêm sinh viên mới thành công";

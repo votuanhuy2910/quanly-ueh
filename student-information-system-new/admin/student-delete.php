@@ -16,7 +16,7 @@ if (
          header("Location: student.php?success=$sm");
          exit;
       } else {
-         $em = "Unknown error occurred";
+         $em = "Xảy ra lỗi!";
          header("Location: student.php?error=$em");
          exit;
       }

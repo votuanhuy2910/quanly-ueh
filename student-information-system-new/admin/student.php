@@ -8,7 +8,7 @@ if (
   if ($_SESSION['role'] == 'Admin') {
     include "../DB_connection.php";
     include "data/student.php";
-    // include "data/fee.php";
+
     $students = getAllStudents($conn);
 
     // Tính số hồ sơ đã trả
@@ -112,18 +112,6 @@ if (
                   </button>
                 </div>
               </form>
-
-              <!-- <form action="student-search.php" class="n-table" method="get" style="width: 100%;">
-                <div class="input-group mb-3">
-                  <select class="form-select" name="searchKey">
-                    <option value="">Tìm theo</option>
-                    <option value="admission_num">ID Nhập học</option>
-                    <option value="mssv">MSSV</option>
-                    <option value="fname">Họ</option>
-                    <option value="lname">Tên</option>
-                  </select>
-                </div>
-              </form> -->
             </div>
           </nav>
 

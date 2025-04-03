@@ -24,8 +24,6 @@ if (
             include '../../DB_connection.php';
             include "../data/student.php";
 
-            // $admission_num = $_POST['admission_num'];
-            // $mssv = $_POST['mssv'];
             $fname = $_POST['fname'];
             $lname = $_POST['lname'];
             $date_of_birth = $_POST['date_of_birth'];
@@ -37,15 +35,6 @@ if (
             $student_id = $_POST['student_id'];
             $data = 'student_id=' . $student_id;
 
-            // if (empty($admission_num)) {
-            //     $em  = "ID Nhập học is required";
-            //     header("Location: ../student-add.php?error=$em&$data");
-            //     exit;
-            // } else if (empty($mssv)) {
-            //     $em  = "MSSV is required";
-            //     header("Location: ../student-add.php?error=$em&$data");
-            //     exit;
-            // } else 
             if (empty($fname)) {
                 $em  = "Họ và tên đệm không được để trống!";
                 header("Location: ../student-add.php?error=$em&$data");
