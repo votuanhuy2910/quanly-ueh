@@ -9,8 +9,9 @@ if (
 
 
         if (
-            isset($_POST['admission_num']) &&
-            isset($_POST['mssv'])  &&
+            isset($_POST['student_id']) &&
+            // isset($_POST['admission_num']) &&
+            // isset($_POST['mssv'])  &&
             isset($_POST['fname']) &&
             isset($_POST['lname']) &&
             isset($_POST['date_of_birth']) &&
@@ -23,8 +24,8 @@ if (
             include '../../DB_connection.php';
             include "../data/student.php";
 
-            $admission_num = $_POST['admission_num'];
-            $mssv = $_POST['mssv'];
+            // $admission_num = $_POST['admission_num'];
+            // $mssv = $_POST['mssv'];
             $fname = $_POST['fname'];
             $lname = $_POST['lname'];
             $date_of_birth = $_POST['date_of_birth'];
@@ -46,43 +47,42 @@ if (
             //     exit;
             // } else 
             if (empty($fname)) {
-                $em  = "First name is required";
+                $em  = "Họ và tên đệm không được để trống!";
                 header("Location: ../student-add.php?error=$em&$data");
                 exit;
             } else if (empty($lname)) {
-                $em  = "Last name is required";
+                $em  = "Tên không được để trống!";
                 header("Location: ../student-add.php?error=$em&$data");
                 exit;
             } else if (empty($date_of_birth)) {
-                $em  = "Date of birth is required";
+                $em  = "Ngày sinh không được để trống!";
                 header("Location: ../student-add.php?error=$em&$data");
                 exit;
             } else if (empty($course)) {
-                $em  = "Course is required";
+                $em  = "Khóa học không được để trống!";
                 header("Location: ../student-add.php?error=$em&$data");
                 exit;
             } else if (empty($gender)) {
-                $em  = "Gender is required";
+                $em  = "Giới tính không được để trống!";
                 header("Location: ../student-add.php?error=$em&$data");
                 exit;
             } else if (empty($status)) {
-                $em  = "Status is required";
+                $em  = "Tình trạng không được để trống!";
                 header("Location: ../student-add.php?error=$em&$data");
                 exit;
-            }
-            else {
+            } else {
                 $sql = "UPDATE students SET
                 fname=?, lname=?, date_of_birth=?, course=?, gender=?, status=?, note=?
                 WHERE student_id=?";
 
                 $stmt = $conn->prepare($sql);
                 $stmt->execute([$fname, $lname, $date_of_birth, $course, $gender, $status, $note, $student_id]);
-                $sm = "successfully updated!";
+                $sm = "Cập nhật thông tin thành công!";
                 header("Location: ../student-edit.php?success=$sm&$data");
                 exit;
             }
         } else {
-            $em = "An error occurred";
+            $em = "Xảy ra lỗi!";
             header("Location: ../student.php?error=$em");
             exit;
         }

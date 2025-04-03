@@ -7,12 +7,31 @@ if (
 
   if ($_SESSION['role'] == 'Admin') {
     if (isset($_GET['searchKey'])) {
+      $students = []; // Không tìm thấy dữ liệu
+      // $search_key = $_GET['searchKey'];
+      $search_key = trim($_GET['searchKey']); // Xóa khoảng trắng đầu cuối
 
-      $search_key = $_GET['searchKey'];
-      include "../DB_connection.php";
-      include "data/student.php";
-      include "data/fee.php";
-      $students = searchStudents($search_key, $conn);
+      if ($search_key === '') {
+        echo "<script>alert('Vui lòng nhập từ khóa tìm kiếm!');
+            window.history.back(); // Làm mới trang sau khi alert
+              </script>";
+      } else {
+        include "../DB_connection.php";
+        include "data/student.php";
+        $students = searchStudents($search_key, $conn);
+
+        if (empty($students)) {
+          echo "<script>alert('Không tìm thấy sinh viên!');
+              window.history.back(); // Làm mới trang sau khi alert
+                </script>";
+        }
+      }
+
+
+      // include "../DB_connection.php";
+      // include "data/student.php";
+      // include "data/fee.php";
+      // $students = searchStudents($search_key, $conn);
 ?>
       <?php
       include "req/header.php";
@@ -24,15 +43,15 @@ if (
         if ($students != 0) {
         ?>
           <div class="container mt-5">
-            <a href="student-add.php" class="btn btn-dark">Add New Student</a>
-            <form action="student-search.php" class="mt-3 n-table" method="post">
+            <a href="student.php" class="btn btn-dark">Quay lại</a>
+            <!-- <form action="student-search.php" class="mt-3 n-table" method="post">
               <div class="input-group mb-3">
                 <input type="text" class="form-control" name="searchKey" placeholder="Search...">
                 <button class="btn btn-primary">
                   <i class="fa fa-search" aria-hidden="true"></i>
                 </button>
               </div>
-            </form>
+            </form> -->
 
             <?php if (isset($_GET['error'])) { ?>
               <div class="alert alert-danger mt-3 n-table" role="alert">
@@ -47,21 +66,20 @@ if (
             <?php } ?>
 
             <div class="table-responsive">
-              <table class="table table-bordered mt-3 n-table">
+              <table class="table table-bordered mt-3 n-table" style="max-width: 1600px;">
                 <thead>
-                  <tr>
-                    <th scope="col">ID</th>
-                    <th scope="col">Name</th>
-                    <th scope="col">Username</th>
-                    <th scope="col">Depatment</th>
-                    <th scope="col">Semester</th>
-                    <th scope="col">Year</th>
-                    <th scope="col">Section</th>
-                    <th scope="col">Intake</th>
-                    <th scope="col">Parent&nbsp;Name</th>
-                    <th scope="col">Parent&nbsp;Phone</th>
-                    <th scope="col">Total&nbsp;Demand</th>
-                    <th scope="col">Action</th>
+                  <tr style="text-align: center;">
+                    <th scope="col">STT</th>
+                    <th scope="col">ID Nhập học</th>
+                    <th scope="col">MSSV</th>
+                    <th scope="col">Họ và tên</th>
+                    <!-- <th scope="col">Username</th> -->
+                    <th scope="col">Ngày sinh</th>
+                    <th scope="col">Khoá học</th>
+                    <th scope="col">Giới tính</th>
+                    <th scope="col">Tình trạng</th>
+                    <th scope="col">Lý do</th>
+                    <!-- <th scope="col">Action</th> -->
                   </tr>
                 </thead>
                 <tbody>
@@ -74,28 +92,29 @@ if (
                     // }
                   ?>
                     <tr>
-                      <td><?= $student['student_id'] ?></td>
+                      <td style="text-align: center;"><?= $student['student_id'] ?></td>
+                      <td style="text-align: center;"><?= $student['admission_num'] ?></td>
+                      <td style="text-align: center;"><?= $student['mssv'] ?></td>
                       <td>
-                        <a href="student-view.php?student_id=<?= $student['student_id'] ?>">
+                        <a href="student-view.php?student_id=<?= $student['student_id'] ?>" style="text-decoration: none;">
                           <?= $student['fname'] . '&nbsp' . $student['lname'] ?>
                         </a>
                       </td>
 
 
-                      <td><?= $student['username'] ?></td>
-                      <td><?= $student['department'] ?></td>
-                      <td><?= $student['semester'] ?></td>
-                      <td><?= $student['year'] ?></td>
-                      <td><?= $student['section'] ?></td>
-                      <td><?= $student['intake'] ?></td>
-                      <td><?= $student['parent_lname'] ?></td>
-                      <td><?= $student['parent_phone_number'] ?></td>
-                      <td><?= $fee ?></td>
-
-                      <td>
-                        <a href="student-edit.php?student_id=<?= $student['student_id'] ?>" class="btn btn-warning mb-2">Edit</a>
-                        <a href="student-delete.php?student_id=<?= $student['student_id'] ?>" class="btn btn-danger">Delete</a>
+                      <td style="text-align: center;">
+                        <?= date('d-m-Y', strtotime($student['date_of_birth'])) ?>
                       </td>
+                      <td style="text-align: center;"><?= $student['course'] ?></td>
+                      <td style="text-align: center;"><?= $student['gender'] ?></td>
+                      <td><?= $student['status'] ?></td>
+                      <td><?= $student['note'] ?></td>
+
+                      <!-- <td style="display: flex; align-items: center; justify-content: space-evenly;"> -->
+                      <!-- <a href="student-edit.php?student_id=<?= $student['student_id'] ?>" class="btn btn-warning">Edit</a>
+                        <a href="student-delete.php?student_id=<?= $student['student_id'] ?>" class="btn btn-danger">Delete</a> -->
+                      <!-- <a href="student.php" class="btn btn-dark">Quay lại</a> -->
+                      <!-- </td> -->
                     </tr>
                   <?php } ?>
                 </tbody>
@@ -103,19 +122,18 @@ if (
             </div>
           <?php } else { ?>
             <div class="alert alert-info .w-450 m-5" role="alert">
-              No Results Found
-              <a href="student.php" class="btn btn-dark">Go Back</a>
+              Không tìm thấy thông tin sinh viên
+              <a href="student.php" class="btn btn-dark">Quay lại</a>
             </div>
           <?php } ?>
           </div>
 
           <script src="../js/bootstrap.bundle.min.js"></script>
           <script>
-            $(document).ready(function() {
-              $("#navLinks li:nth-child(3) a").addClass('active');
-            });
+            // $(document).ready(function() {
+            // $("#navLinks li:nth-child(3) a").addClass('active');
+            // });
           </script>
-
       </body>
 
       </html>
@@ -123,6 +141,7 @@ if (
     } else {
       header("Location: student.php");
       exit;
+      // $students = [];
     }
   } else {
     header("Location: ../login.php");

@@ -79,9 +79,9 @@ if (
 
                     <div class="mb-3">
                         <label class="form-label">Giới tính</label><br>
-                        <input type="radio" value="Male" checked name="gender"> Nam
+                        <input type="radio" value="Nam" checked name="gender"> Nam
                         &nbsp;&nbsp;&nbsp;&nbsp;
-                        <input type="radio" value="Female" name="gender"> Nữ
+                        <input type="radio" value="Nữ" name="gender"> Nữ
                     </div>
 
                     <div class="mb-3">

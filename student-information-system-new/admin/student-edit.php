@@ -70,7 +70,7 @@ if (
               class="form-control"
               value="<?= $student['mssv'] ?>"
               name="mssv"
-              disabled>
+              readonly>
           </div>
           <div class="mb-3">
             <label class="form-label">ID Nhập học</label>
@@ -78,7 +78,7 @@ if (
               class="form-control"
               value="<?= $student['admission_num'] ?>"
               name="admission_num"
-              disabled>
+              readonly>
           </div>
           <div class="mb-3">
             <label class="form-label">Ngày/Tháng/Năm sinh</label>
@@ -141,6 +141,9 @@ if (
               name="note">
           </div>
           <hr>
+          <input type="text"
+            value="<?= $student['student_id'] ?>"
+            name="student_id" hidden>
 
           <button type="submit" class="btn btn-primary">
             Cập nhật
@@ -205,7 +208,7 @@ if (
       </div>
 
       <script src="../js/bootstrap.bundle.min.js"></script>
-      <script>
+      <!-- <script>
         // $(document).ready(function() {
         //   $("#navLinks li:nth-child(3) a").addClass('active');
         // });
@@ -230,7 +233,7 @@ if (
           e.preventDefault();
           makePass(4);
         });
-      </script>
+      </script> -->
 
     </body>
 
