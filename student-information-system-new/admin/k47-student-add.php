@@ -37,9 +37,9 @@ if (
             include "inc/navbar.php";
             ?>
             <div class="container mt-5">
-                <a href="student.php" class="btn btn-dark">Quay lại</a>
+                <a href="k47-student.php" class="btn btn-dark">Quay lại</a>
 
-                <form method="post" class="shadow p-3 mt-5 form-w" action="req/student-add.php">
+                <form method="post" class="shadow p-3 mt-5 form-w" action="req/k47-student-add.php">
                     <h3>Thêm sinh viên mới</h3>
                     <hr>
                     <?php if (isset($_GET['error'])) { ?>
@@ -115,15 +115,15 @@ if (
                     </div>
 
                     <button type="submit" class="btn btn-primary">Thêm</button>
-                    <a href="student.php" class="btn btn-dark">Quay lại</a>
+                    <a href="k47-student.php" class="btn btn-dark">Quay lại</a>
                 </form>
             </div>
 
             <script src="../js/bootstrap.bundle.min.js"></script>
             <script>
-                // $(document).ready(function() {
-                //     $("#navLinks li:nth-child(3) a").addClass('active');
-                // });
+                $(document).ready(function() {
+                    $("#navLinks li:nth-child(7) a").addClass('active');
+                });
             </script>
 
         </body>

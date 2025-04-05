@@ -25,35 +25,35 @@
         </li>
 
         <li class="nav-item">
-          <a class="nav-link" href="student-k50.php">K50</a>
+          <a class="nav-link" href="k50-student.php">K50</a>
         </li>
 
         <li class="nav-item">
-          <a class="nav-link" href="student-k49.php">K49</a>
+          <a class="nav-link" href="k49-student.php">K49</a>
         </li>
 
         <li class="nav-item">
-          <a class="nav-link" href="student-k48.php">K48</a>
+          <a class="nav-link" href="k48-student.php">K48</a>
         </li>
 
         <li class="nav-item">
-          <a class="nav-link" href="student-k47.php">K47</a>
+          <a class="nav-link" href="k47-student.php">K47</a>
         </li>
 
         <li class="nav-item">
-          <a class="nav-link" href="student-k46.php">K46</a>
+          <a class="nav-link" href="k46-student.php">K46</a>
         </li>
 
         <li class="nav-item">
-          <a class="nav-link" href="student-k45.php">K45</a>
+          <a class="nav-link" href="k45-student.php">K45</a>
         </li>
 
         <li class="nav-item">
-          <a class="nav-link" href="student-k44.php">K44</a>
+          <a class="nav-link" href="k44-student.php">K44</a>
         </li>
 
         <li class="nav-item">
-          <a class="nav-link" href="student-k43.php">K43</a>
+          <a class="nav-link" href="k43-student.php">K43</a>
         </li>
 
         <li class="nav-item">

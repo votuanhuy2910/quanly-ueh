@@ -111,26 +111,18 @@ function unameIsUnique($admission_num, $mssv,  $conn, $student_id = 0)
 function searchStudents($key, $conn)
 {
   $key = preg_replace('/(?<!\\\)([%_])/', '\\\$1', $key);
-  $key = "%$key%";
 
   $sql = "SELECT * FROM students
-           WHERE student_id LIKE ? 
-           OR admission_num LIKE ?
-           OR mssv LIKE ?
-           OR fname LIKE ?
-           OR lname LIKE ?
-           OR status LIKE ?
-           OR note LIKE ?
-           OR CONCAT(fname, ' ', lname) LIKE ?";
+            WHERE CAST(student_id AS CHAR) LIKE ?
+               OR admission_num LIKE ?
+               OR mssv LIKE ?
+               OR fname LIKE ?
+               OR lname LIKE ?
+               OR status = ?
+               OR note LIKE ?
+               OR CONCAT(fname, ' ', lname) LIKE ?";
   $stmt = $conn->prepare($sql);
   $stmt->execute([$key, $key, $key, $key, $key, $key, $key, $key]);
 
-  // if ($stmt->rowCount() == 1) {
-  //   $students = $stmt->fetchAll();
-  //   return $students;
-  // } else {
-  //   return 0;
-  // }
-
-  return $stmt->fetchAll(); // Trả về tất cả kết quả
+  return $stmt->fetchAll(PDO::FETCH_ASSOC); // Trả về tất cả kết quả
 }

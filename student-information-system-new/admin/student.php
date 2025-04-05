@@ -189,10 +189,47 @@ if (
             // Pagination links
             echo "<nav aria-label='Page navigation example'>";
             echo "<ul class='pagination justify-content-center'>";
-            for ($i = 1; $i <= $total_pages; $i++) {
-              $active = $i == $page ? 'active' : '';
-              echo "<li class='page-item $active'><a class='page-link' href='?page=$i'>$i</a></li>";
+
+            if ($total_pages > 1) {
+              // Previous button
+              if ($page > 1) {
+                $prev_page = $page - 1;
+                echo "<li class='page-item'><a class='page-link' href='?page=$prev_page'>Prev</a></li>";
+              }
+
+              // Always show page 1
+              $active = $page == 1 ? 'active' : '';
+              echo "<li class='page-item $active'><a class='page-link' href='?page=1'>1</a></li>";
+
+              // Add "..." if current page > 5
+              if ($page > 5) {
+                echo "<li class='page-item disabled'><a class='page-link'>...</a></li>";
+              }
+
+              // Pages around current (4 before and 4 after)
+              for ($i = max(2, $page - 4); $i <= min($total_pages - 1, $page + 4); $i++) {
+                $active = $i == $page ? 'active' : '';
+                echo "<li class='page-item $active'><a class='page-link' href='?page=$i'>$i</a></li>";
+              }
+
+              // Add "..." if current page < total_pages - 4
+              if ($page < $total_pages - 4) {
+                echo "<li class='page-item disabled'><a class='page-link'>...</a></li>";
+              }
+
+              // Always show last page if total_pages > 1
+              if ($total_pages > 1) {
+                $active = $page == $total_pages ? 'active' : '';
+                echo "<li class='page-item $active'><a class='page-link' href='?page=$total_pages'>$total_pages</a></li>";
+              }
+
+              // Next button
+              if ($page < $total_pages) {
+                $next_page = $page + 1;
+                echo "<li class='page-item'><a class='page-link' href='?page=$next_page'>Next</a></li>";
+              }
             }
+
             echo "</ul>";
             echo "</nav>";
           } else {
@@ -204,7 +241,7 @@ if (
       } else {
         ?>
           <div class="alert alert-info .w-450 m-5" role="alert">
-            Empty!
+            Không có sinh viên!
           </div>
         <?php } ?>
         </div>

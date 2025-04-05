@@ -123,6 +123,8 @@ if (
               <option <?php if ($student['status'] == "Nghỉ học tạm thời") echo "selected"; ?>>Nghỉ học tạm thời</option>
               <option <?php if ($student['status'] == "Buộc thôi học") echo "selected"; ?>>Buộc thôi học</option>
               <option <?php if ($student['status'] == "Thôi học") echo "selected"; ?>>Thôi học</option>
+              <option <?php if ($student['status'] == "Tốt nghiệp") echo "selected"; ?>>Thôi học</option>
+              <option <?php if ($student['status'] == "Không nhập học") echo "selected"; ?>>Thôi học</option>
             </select>
           </div>
 

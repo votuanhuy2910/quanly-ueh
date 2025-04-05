@@ -57,9 +57,9 @@ if (
                                 <a href="#" class="btn btn-success mt-3">Export Excel</a>
                             </div>
 
-                            <a href="k51-student-add.php" class="btn btn-dark mt-3">Thêm sinh viên mới</a>
+                            <a href="k47-student-add.php" class="btn btn-dark mt-3">Thêm sinh viên mới</a>
 
-                            <form action="k51-student-search.php" class="n-table" method="get" style="width: 100%;">
+                            <form action="k47-student-search.php" class="n-table" method="get" style="width: 100%;">
                                 <div class="input-group mb-3">
                                     <input type="text" class="form-control" name="searchKey" placeholder="Search...">
                                     <button class="btn btn-primary">
@@ -107,36 +107,36 @@ if (
                     if ($students_paginated) {
                         echo "<table class='table table-bordered mt-3 n-table' style='max-width: 1600px;'>";
                         echo "<thead>
-                  <tr style='text-align: center;'>
-                  <th scope='col'>STT</th>
-                  <th scope='col'>ID Nhập học</th>
-                  <th scope='col'>MSSV</th>
-                  <th scope='col'>Họ và tên</th>
-                  <th scope='col'>Ngày sinh</th>
-                  <th scope='col'>Khoá học</th>
-                  <th scope='col'>Giới tính</th>
-                  <th scope='col'>Tình trạng</th>
-                  <th scope='col'>Lý do <br> (đã rút hồ sơ)</th>
-                  <th scope='col'>Action</th>
-                  </tr>
-                </thead>";
+                            <tr style='text-align: center;'>
+                                <th scope='col'>STT</th>
+                                <th scope='col'>ID Nhập học</th>
+                                <th scope='col'>MSSV</th>
+                                <th scope='col'>Họ và tên</th>
+                                <th scope='col'>Ngày sinh</th>
+                                <th scope='col'>Khoá học</th>
+                                <th scope='col'>Giới tính</th>
+                                <th scope='col'>Tình trạng</th>
+                                <th scope='col'>Lý do <br> (đã rút hồ sơ)</th>
+                                <th scope='col'>Action</th>
+                            </tr>
+                        </thead>";
                         echo "<tbody>";
                         foreach ($students_paginated as $student) {
                             echo "<tr>
-                  <td style='text-align: center;'>{$student['student_id']}</td>
-                  <td style='text-align: center;'>{$student['admission_num']}</td>
-                  <td style='text-align: center;'>{$student['mssv']}</td>
-                  <td><a href='k51-student-view.php?student_id={$student['student_id']}' style='text-decoration: none; text-transform: capitalize;'>{$student['fname']} {$student['lname']}</a></td>
-                  <td style='text-align: center;'>" . date('d-m-Y', strtotime($student['date_of_birth'])) . "</td>
-                  <td style='text-align: center;'>{$student['course']}</td>
-                  <td style='text-align: center;'>{$student['gender']}</td>
-                  <td>{$student['status']}</td>
-                  <td>{$student['note']}</td>
-                  <td style='display: flex; align-items: center; justify-content: space-evenly;'>
-                    <a href='k51-student-edit.php?student_id={$student['student_id']}' class='btn btn-warning'>Edit</a>
-                    <a href='k51-student-delete.php?student_id={$student['student_id']}' class='btn btn-danger'>Delete</a>
-                  </td>
-                  </tr>";
+                                <td style='text-align: center;'>{$student['student_id']}</td>
+                                <td style='text-align: center;'>{$student['admission_num']}</td>
+                                <td style='text-align: center;'>{$student['mssv']}</td>
+                                <td><a href='k47-student-view.php?student_id={$student['student_id']}' style='text-decoration: none; text-transform: capitalize;'>{$student['fname']} {$student['lname']}</a></td>
+                                <td style='text-align: center;'>" . date('d-m-Y', strtotime($student['date_of_birth'])) . "</td>
+                                <td style='text-align: center;'>{$student['course']}</td>
+                                <td style='text-align: center;'>{$student['gender']}</td>
+                                <td>{$student['status']}</td>
+                                <td>{$student['note']}</td>
+                                <td style='display: flex; align-items: center; justify-content: space-evenly;'>
+                                    <a href='k47-student-edit.php?student_id={$student['student_id']}' class='btn btn-warning'>Edit</a>
+                                    <a href='k47-student-delete.php?student_id={$student['student_id']}' class='btn btn-danger'>Delete</a>
+                                </td>
+                            </tr>";
                         }
                         echo "</tbody>";
                         echo "</table>";
@@ -144,10 +144,47 @@ if (
                         // Pagination links
                         echo "<nav aria-label='Page navigation example'>";
                         echo "<ul class='pagination justify-content-center'>";
-                        for ($i = 1; $i <= $total_pages; $i++) {
-                            $active = $i == $page ? 'active' : '';
-                            echo "<li class='page-item $active'><a class='page-link' href='?page=$i'>$i</a></li>";
+
+                        if ($total_pages > 1) {
+                            // Previous button
+                            if ($page > 1) {
+                                $prev_page = $page - 1;
+                                echo "<li class='page-item'><a class='page-link' href='?page=$prev_page'>Prev</a></li>";
+                            }
+
+                            // Always show page 1
+                            $active = $page == 1 ? 'active' : '';
+                            echo "<li class='page-item $active'><a class='page-link' href='?page=1'>1</a></li>";
+
+                            // Add "..." if current page > 5
+                            if ($page > 5) {
+                                echo "<li class='page-item disabled'><a class='page-link'>...</a></li>";
+                            }
+
+                            // Pages around current (4 before and 4 after)
+                            for ($i = max(2, $page - 4); $i <= min($total_pages - 1, $page + 4); $i++) {
+                                $active = $i == $page ? 'active' : '';
+                                echo "<li class='page-item $active'><a class='page-link' href='?page=$i'>$i</a></li>";
+                            }
+
+                            // Add "..." if current page < total_pages - 4
+                            if ($page < $total_pages - 4) {
+                                echo "<li class='page-item disabled'><a class='page-link'>...</a></li>";
+                            }
+
+                            // Always show last page if total_pages > 1
+                            if ($total_pages > 1) {
+                                $active = $page == $total_pages ? 'active' : '';
+                                echo "<li class='page-item $active'><a class='page-link' href='?page=$total_pages'>$total_pages</a></li>";
+                            }
+
+                            // Next button
+                            if ($page < $total_pages) {
+                                $next_page = $page + 1;
+                                echo "<li class='page-item'><a class='page-link' href='?page=$next_page'>Next</a></li>";
+                            }
                         }
+
                         echo "</ul>";
                         echo "</nav>";
                     } else {
@@ -159,7 +196,7 @@ if (
             } else {
                 ?>
                     <div class="alert alert-info .w-450 m-5" role="alert">
-                        Empty!
+                        Không có sinh viên!
                     </div>
                 <?php } ?>
                 </div>
@@ -167,7 +204,7 @@ if (
                 <script src="../../js/bootstrap.bundle.min.js"></script>
                 <script>
                     $(document).ready(function() {
-                        $("#navLinks li:nth-child(3) a").addClass('active');
+                        $("#navLinks li:nth-child(7) a").addClass('active');
                     });
                 </script>
 
