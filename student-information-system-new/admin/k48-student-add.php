@@ -37,9 +37,9 @@ if (
             include "inc/navbar.php";
             ?>
             <div class="container mt-5">
-                <a href="student.php" class="btn btn-dark">Quay lại</a>
+                <a href="k48-student.php" class="btn btn-dark">Quay lại</a>
 
-                <form method="post" class="shadow p-3 mt-5 form-w" action="req/student-add.php">
+                <form method="post" class="shadow p-3 mt-5 form-w" action="req/k48-student-add.php">
                     <h3>Thêm sinh viên mới</h3>
                     <hr>
                     <?php if (isset($_GET['error'])) { ?>
@@ -88,7 +88,7 @@ if (
                         <label class="form-label">Khoá học</label>
                         <select class="form-control" name="course">
                             <?php
-                            $courseList = array("K51", "K50", "K49", "K48", "K47", "K46", "K45", "K44", "K43");
+                            $courseList = array("K51", "K50", "K49", "K48", "k47", "K46", "K45", "K44", "K43");
                             foreach ($courseList as $course) {
                                 echo "<option value='$course'>$course</option>";
                             }
@@ -115,14 +115,14 @@ if (
                     </div>
 
                     <button type="submit" class="btn btn-primary">Thêm</button>
-                    <a href="student.php" class="btn btn-dark">Quay lại</a>
+                    <a href="k48-student.php" class="btn btn-dark">Quay lại</a>
                 </form>
             </div>
 
             <script src="../js/bootstrap.bundle.min.js"></script>
             <script>
                 $(document).ready(function() {
-                    $("#navLinks li:nth-child(2) a").addClass('active');
+                    $("#navLinks li:nth-child(6) a").addClass('active');
                 });
             </script>
 

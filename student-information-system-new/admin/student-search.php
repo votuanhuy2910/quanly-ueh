@@ -112,9 +112,9 @@ if (
 
           <script src="../js/bootstrap.bundle.min.js"></script>
           <script>
-            // $(document).ready(function() {
-            // $("#navLinks li:nth-child(3) a").addClass('active');
-            // });
+            $(document).ready(function() {
+              $("#navLinks li:nth-child(2) a").addClass('active');
+            });
           </script>
       </body>
 
