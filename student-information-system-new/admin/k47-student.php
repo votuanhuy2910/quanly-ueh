@@ -203,8 +203,28 @@ if (
 
                 <script src="../../js/bootstrap.bundle.min.js"></script>
                 <script>
-                    $(document).ready(function() {
-                        $("#navLinks li:nth-child(7) a").addClass('active');
+                    // $(document).ready(function() {
+                    //     $("#navLinks li:nth-child(7) a").addClass('active');
+                    // });
+                </script>
+
+                <script>
+                    document.addEventListener("DOMContentLoaded", function() {
+                        const navLinks = document.querySelectorAll("#navLinks li:nth-child(7) a");
+                        if (navLinks.length > 0) {
+                            navLinks[0].classList.add('active');
+                        }
+
+                        // Add custom CSS for the 'active' class
+                        const style = document.createElement('style');
+                        style.textContent = `
+                            .active {
+                            color: #fff !important;
+                            background-color: #007bff !important;
+                            border-radius: 5px;
+                            }
+                        `;
+                        document.head.appendChild(style);
                     });
                 </script>
 
