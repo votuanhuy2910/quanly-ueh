@@ -49,7 +49,7 @@ if (
       include "inc/navbar.php";
       if ($students != 0) {
       ?>
-        <div class="container mt-5">
+        <div class="container mt-5" style="max-width: 1600px;">
           <nav style="display: flex; align-items: flex-start; justify-content: space-evenly;">
             <table style="border-collapse: collapse; width: 30%; margin-bottom: 2rem;">
               <thead>
@@ -153,34 +153,40 @@ if (
             echo "<table class='table table-bordered mt-3 n-table' style='max-width: 1600px;'>";
             echo "<thead>
                   <tr style='text-align: center;'>
-                  <th scope='col'>STT</th>
-                  <th scope='col'>ID Nhập học</th>
-                  <th scope='col'>MSSV</th>
-                  <th scope='col'>Họ và tên</th>
-                  <th scope='col'>Ngày sinh</th>
-                  <th scope='col'>Khoá học</th>
-                  <th scope='col'>Giới tính</th>
-                  <th scope='col'>Tình trạng</th>
-                  <th scope='col'>Lý do <br> (đã rút hồ sơ)</th>
-                  <th scope='col'>Action</th>
+                    <th scope='col'>STT</th>
+                    <th scope='col'>ID Nhập học</th>
+                    <th scope='col'>MSSV</th>
+                    <th scope='col'>Họ và tên</th>
+                    <th scope='col'>Ngày sinh</th>
+                    <th scope='col'>Khoá học</th>
+                    <th scope='col'>Khoá gốc</th>
+                    <th scope='col'>Mã hồ sơ</th>
+                    <th scope='col'>Số vào sổ</th>
+                    <th scope='col'>Ngày tốt nghiệp</th>
+                    <th scope='col'>Tình trạng</th>
+                    <th scope='col'>Lý do <br> (đã rút hồ sơ)</th>
+                    <th scope='col'>Action</th>
                   </tr>
                 </thead>";
             echo "<tbody>";
             foreach ($students_paginated as $student) {
               echo "<tr>
-                  <td style='text-align: center;'>{$student['student_id']}</td>
-                  <td style='text-align: center;'>{$student['admission_num']}</td>
-                  <td style='text-align: center;'>{$student['mssv']}</td>
-                  <td><a href='student-view.php?student_id={$student['student_id']}' style='text-decoration: none; text-transform: capitalize;'>{$student['fname']} {$student['lname']}</a></td>
-                  <td style='text-align: center;'>" . date('d-m-Y', strtotime($student['date_of_birth'])) . "</td>
-                  <td style='text-align: center;'>{$student['course']}</td>
-                  <td style='text-align: center;'>{$student['gender']}</td>
-                  <td>{$student['status']}</td>
-                  <td>{$student['note']}</td>
-                  <td style='display: flex; align-items: center; justify-content: space-evenly;'>
-                    <a href='student-edit.php?student_id={$student['student_id']}' class='btn btn-warning'>Edit</a>
-                    <a href='student-delete.php?student_id={$student['student_id']}' class='btn btn-danger'>Delete</a>
-                  </td>
+                      <td style='text-align: center;'>{$student['student_id']}</td>
+                      <td style='text-align: center;'>{$student['admission_num']}</td>
+                      <td style='text-align: center;'>{$student['mssv']}</td>
+                      <td><a href='student-view.php?student_id={$student['student_id']}' style='text-decoration: none; text-transform: capitalize;'>{$student['fname']}</a></td>
+                      <td style='text-align: center;'>" . date('d-m-Y', strtotime($student['date_of_birth'])) . "</td>
+                      <td style='text-align: center;'>{$student['course']}</td>
+                      <td style='text-align: center;'>{$student['course_ori']}</td>
+                      <td style='text-align: center;'>{$student['profile_num']}</td>
+                      <td style='text-align: center;'>{$student['bookgraduate_num']}</td>
+                      <td style='text-align: center;'>" . date('d-m-Y', strtotime($student['date_graduate'])) . "</td>
+                      <td>{$student['status']}</td>
+                      <td>{$student['note']}</td>
+                      <td style='display: flex; align-items: center; justify-content: space-evenly;'>
+                        <a href='student-edit.php?student_id={$student['student_id']}' class='btn btn-warning'>Edit</a>
+                        <a href='student-delete.php?student_id={$student['student_id']}' class='btn btn-danger'>Delete</a>
+                      </td>
                   </tr>";
             }
             echo "</tbody>";

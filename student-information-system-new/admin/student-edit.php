@@ -37,7 +37,7 @@ if (
 
         <form method="post"
           class="shadow p-3 mt-5 form-w"
-          action="req/student-edit.php">
+          action="req/edit_dispatcher.php">
           <h3>Chỉnh sửa thông tin sinh viên</h3>
           <hr>
           <?php if (isset($_GET['error'])) { ?>
@@ -51,18 +51,11 @@ if (
             </div>
           <?php } ?>
           <div class="mb-3">
-            <label class="form-label">Họ và tên đệm</label>
+            <label class="form-label">Họ và tên</label>
             <input type="text"
               class="form-control"
               value="<?= $student['fname'] ?>"
               name="fname">
-          </div>
-          <div class="mb-3">
-            <label class="form-label">Tên</label>
-            <input type="text"
-              class="form-control"
-              value="<?= $student['lname'] ?>"
-              name="lname">
           </div>
           <div class="mb-3">
             <label class="form-label">Mã số sinh viên</label>
@@ -112,9 +105,9 @@ if (
               <option <?php if ($student['course'] == "K45") echo "selected"; ?>>K45</option>
               <option <?php if ($student['course'] == "K44") echo "selected"; ?>>K44</option>
               <option <?php if ($student['course'] == "K43") echo "selected"; ?>>K43</option>
-
             </select>
           </div>
+          
           <div class="mb-3">
             <label class="form-label">Tình trạng</label>
             <select class="form-control" name="status">
@@ -123,8 +116,8 @@ if (
               <option <?php if ($student['status'] == "Nghỉ học tạm thời") echo "selected"; ?>>Nghỉ học tạm thời</option>
               <option <?php if ($student['status'] == "Buộc thôi học") echo "selected"; ?>>Buộc thôi học</option>
               <option <?php if ($student['status'] == "Thôi học") echo "selected"; ?>>Thôi học</option>
-              <option <?php if ($student['status'] == "Tốt nghiệp") echo "selected"; ?>>Thôi học</option>
-              <option <?php if ($student['status'] == "Không nhập học") echo "selected"; ?>>Thôi học</option>
+              <option <?php if ($student['status'] == "Tốt nghiệp") echo "selected"; ?>>Tốt nghiệp</option>
+              <option <?php if ($student['status'] == "Không nhập học") echo "selected"; ?>>Không nhập học</option>
             </select>
           </div>
 

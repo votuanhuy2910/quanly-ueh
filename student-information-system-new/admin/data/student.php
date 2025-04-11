@@ -1,4 +1,30 @@
 <?php
+
+// hàm hỗ trợ xác định bảng theo khóa học
+// function getTableByCourse($course) {
+//   $course = strtolower(trim($course));
+//   if ($course === 'k50') return 'students'; // bảng gốc
+//   return 'students' . $course; // ví dụ: k47 → studentsk47
+// }
+
+// hàm dùng động tên bảng
+function getStudentByIdFromTable($student_id, $table, $conn) {
+  $allowedTables = ['students', 'studentsk47', 'studentsk48'];
+  
+  if (!in_array($table, $allowedTables)) {
+      return 0; // tránh SQL Injection nếu table name không hợp lệ
+  }
+
+  $sql = "SELECT * FROM $table WHERE student_id=?";
+  $stmt = $conn->prepare($sql);
+  $stmt->execute([$student_id]);
+
+  if ($stmt->rowCount() == 1) {
+      return $stmt->fetch();
+  }
+  return 0;
+}
+
 // All Students 
 function getAllStudents($conn)
 {
@@ -58,7 +84,7 @@ function getAllStudentsK49($conn)
 
 function getAllStudentsK48($conn)
 {
-  $sql = "SELECT * FROM students48";
+  $sql = "SELECT * FROM studentsk48";
   $stmt = $conn->prepare($sql);
   $stmt->execute();
 
@@ -72,13 +98,13 @@ function getAllStudentsK48($conn)
 
 function getAllStudentsK47($conn)
 {
-  $sql = "SELECT * FROM students47";
+  $sql = "SELECT * FROM studentsk47";
   $stmt = $conn->prepare($sql);
   $stmt->execute();
 
   if ($stmt->rowCount() >= 1) {
-    $students = $stmt->fetchAll();
-    return $students;
+    $studentsk48 = $stmt->fetchAll();
+    return $studentsk48;
   } else {
     return 0;
   }
@@ -188,7 +214,7 @@ function removeStudentK48($id, $conn)
 
 function removeStudentK47($id, $conn)
 {
-  $sql1  = "DELETE FROM students47 WHERE student_id=?";
+  $sql1  = "DELETE FROM studentsk47 WHERE student_id=?";
   $stmt1 = $conn->prepare($sql1);
   $result1 = $stmt1->execute([$id]);
 
@@ -294,7 +320,7 @@ function getStudentByIdK49($id, $conn)
 
 function getStudentByIdK48($id, $conn)
 {
-  $sql = "SELECT * FROM students48
+  $sql = "SELECT * FROM studentsk48
            WHERE student_id=?";
   $stmt = $conn->prepare($sql);
   $stmt->execute([$id]);
@@ -309,7 +335,7 @@ function getStudentByIdK48($id, $conn)
 
 function getStudentByIdK47($id, $conn)
 {
-  $sql = "SELECT * FROM students47
+  $sql = "SELECT * FROM studentsk47
            WHERE student_id=?";
   $stmt = $conn->prepare($sql);
   $stmt->execute([$id]);
@@ -660,16 +686,14 @@ function searchStudents($key, $conn)
   $key = preg_replace('/(?<!\\\)([%_])/', '\\\$1', $key);
 
   $sql = "SELECT * FROM students
-            WHERE CAST(student_id AS CHAR) LIKE ?
-               OR admission_num LIKE ?
-               OR mssv LIKE ?
+            WHERE admission_num LIKE ?
+               OR mssv = ?
                OR fname LIKE ?
-               OR lname LIKE ?
                OR status = ?
-               OR note LIKE ?
-               OR CONCAT(fname, ' ', lname) LIKE ?";
+               OR note LIKE ?";
   $stmt = $conn->prepare($sql);
-  $stmt->execute([$key, $key, $key, $key, $key, $key, $key, $key]);
+  $key = "%$key%";
+  $stmt->execute([$key, $key, $key, $key, $key]);
 
   return $stmt->fetchAll(PDO::FETCH_ASSOC); // Trả về tất cả kết quả
 }
@@ -754,17 +778,15 @@ function searchStudentsK47($key, $conn)
 {
   $key = preg_replace('/(?<!\\\)([%_])/', '\\\$1', $key);
 
-  $sql = "SELECT * FROM students47
-            WHERE CAST(student_id AS CHAR) LIKE ?
-               OR admission_num LIKE ?
-               OR mssv LIKE ?
+  $sql = "SELECT * FROM studentsk47
+            WHERE admission_num LIKE ?
+               OR mssv = ?
                OR fname LIKE ?
-               OR lname LIKE ?
                OR status = ?
-               OR note LIKE ?
-               OR CONCAT(fname, ' ', lname) LIKE ?";
+               OR note LIKE ?";
   $stmt = $conn->prepare($sql);
-  $stmt->execute([$key, $key, $key, $key, $key, $key, $key, $key]);
+  $key = "%$key%";
+  $stmt->execute([$key, $key, $key, $key, $key]);
 
   return $stmt->fetchAll(PDO::FETCH_ASSOC); // Trả về tất cả kết quả
 }

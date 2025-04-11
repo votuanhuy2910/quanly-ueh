@@ -12,7 +12,6 @@ if (
         $admission_num = '';
         $mssv = '';
         $fname = '';
-        $lname = '';
         // $uname = '';
         $course = '';
         $status = '';
@@ -21,7 +20,6 @@ if (
         if (isset($_GET['admission_num'])) $admission_num = $_GET['admission_num'];
         if (isset($_GET['mssv'])) $mssv = $_GET['mssv'];
         if (isset($_GET['fname'])) $fname = $_GET['fname'];
-        if (isset($_GET['lname'])) $lname = $_GET['lname'];
         // if (isset($_GET['uname'])) $uname = $_GET['uname'];
         if (isset($_GET['course'])) $course = $_GET['course'];
         if (isset($_GET['status'])) $status = $_GET['status'];
@@ -63,13 +61,8 @@ if (
                     </div>
 
                     <div class="mb-3">
-                        <label class="form-label">Họ và tên đệm</label>
+                        <label class="form-label">Họ và tên</label>
                         <input type="text" class="form-control" value="<?= $fname ?>" name="fname">
-                    </div>
-
-                    <div class="mb-3">
-                        <label class="form-label">Tên</label>
-                        <input type="text" class="form-control" value="<?= $lname ?>" name="lname">
                     </div>
 
                     <div class="mb-3">

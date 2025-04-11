@@ -32,7 +32,7 @@ if (
                 </div>
 
                 <div class="card-body w-75">
-                  <h5 class="card-title text-center"><?= $student['fname'] . " " . $student['lname'] ?></h5>
+                  <h5 class="card-title text-center"><?= $student['fname'] ?></h5>
                 </div>
 
                 <div class="card-body w-100">

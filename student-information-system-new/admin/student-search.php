@@ -85,7 +85,7 @@ if (
                       <td style="text-align: center;"><?= $student['mssv'] ?></td>
                       <td>
                         <a href="student-view.php?student_id=<?= $student['student_id'] ?>" style="text-decoration: none;">
-                          <?= $student['fname'] . '&nbsp' . $student['lname'] ?>
+                          <?= $student['fname'] ?>
                         </a>
                       </td>
 

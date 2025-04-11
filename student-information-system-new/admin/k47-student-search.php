@@ -18,7 +18,7 @@ if (
             } else {
                 include "../DB_connection.php";
                 include "data/student.php";
-                $students = searchStudents($search_key, $conn);
+                $students = searchStudentsK47($search_key, $conn);
 
                 if (empty($students)) {
                     echo "<script>alert('Không tìm thấy sinh viên!');
@@ -79,7 +79,7 @@ if (
                                             <td style="text-align: center;"><?= $student['mssv'] ?></td>
                                             <td>
                                                 <a href="k47-student-view.php?student_id=<?= $student['student_id'] ?>" style="text-decoration: none;">
-                                                    <?= $student['fname'] . '&nbsp' . $student['lname'] ?>
+                                                    <?= $student['fname'] ?>
                                                 </a>
                                             </td>
 

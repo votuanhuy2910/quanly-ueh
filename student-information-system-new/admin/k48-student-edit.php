@@ -37,7 +37,7 @@ if (
 
                 <form method="post"
                     class="shadow p-3 mt-5 form-w"
-                    action="req/k48-student-edit.php">
+                    action="req/edit_dispatcher.php">
                     <h3>Chỉnh sửa thông tin sinh viên</h3>
                     <hr>
                     <?php if (isset($_GET['error'])) { ?>
@@ -51,18 +51,11 @@ if (
                         </div>
                     <?php } ?>
                     <div class="mb-3">
-                        <label class="form-label">Họ và tên đệm</label>
+                        <label class="form-label">Họ và tên</label>
                         <input type="text"
                             class="form-control"
                             value="<?= $student['fname'] ?>"
                             name="fname">
-                    </div>
-                    <div class="mb-3">
-                        <label class="form-label">Tên</label>
-                        <input type="text"
-                            class="form-control"
-                            value="<?= $student['lname'] ?>"
-                            name="lname">
                     </div>
                     <div class="mb-3">
                         <label class="form-label">Mã số sinh viên</label>

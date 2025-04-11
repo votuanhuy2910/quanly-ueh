@@ -13,7 +13,6 @@ if (
             // isset($_POST['admission_num']) &&
             // isset($_POST['mssv'])  &&
             isset($_POST['fname']) &&
-            isset($_POST['lname']) &&
             isset($_POST['date_of_birth']) &&
             isset($_POST['course']) &&
             isset($_POST['gender'])   &&
@@ -25,7 +24,6 @@ if (
             include "../data/student.php";
 
             $fname = $_POST['fname'];
-            $lname = $_POST['lname'];
             $date_of_birth = $_POST['date_of_birth'];
             $course = $_POST['course'];
             $gender = $_POST['gender'];
@@ -35,32 +33,35 @@ if (
             $student_id = $_POST['student_id'];
             $data = 'student_id=' . $student_id;
 
-            if (empty($fname)) {
-                $em  = "Họ và tên đệm không được để trống!";
-                header("Location: ../k47-student-add.php?error=$em&$data");
+            $student = getStudentByIdK47($student_id, $conn);
+            if (!$student) {
+                $em = "Không tìm thấy sinh viên!";
+                header("Location: ../student.php?error=$em&$data");
                 exit;
-            } else if (empty($lname)) {
-                $em  = "Tên không được để trống!";
-                header("Location: ../k47-student-add.php?error=$em&$data");
+            }
+
+            if (empty($fname)) {
+                $em  = "Họ và tên không được để trống!";
+                header("Location: ../k47-student-edit.php?error=$em&$data");
                 exit;
             } else if (empty($date_of_birth)) {
                 $em  = "Ngày sinh không được để trống!";
-                header("Location: ../k47-student-add.php?error=$em&$data");
+                header("Location: ../k47-student-edit.php?error=$em&$data");
                 exit;
             } else if (empty($course)) {
                 $em  = "Khóa học không được để trống!";
-                header("Location: ../k47-student-add.php?error=$em&$data");
+                header("Location: ../k47-student-edit.php?error=$em&$data");
                 exit;
             } else if (empty($gender)) {
                 $em  = "Giới tính không được để trống!";
-                header("Location: ../k47-student-add.php?error=$em&$data");
+                header("Location: ../k47-student-edit.php?error=$em&$data");
                 exit;
             } else if (empty($status)) {
                 $em  = "Tình trạng không được để trống!";
-                header("Location: ../k47-student-add.php?error=$em&$data");
+                header("Location: ../k47-student-edit.php?error=$em&$data");
                 exit;
             } else {
-                $sql = "UPDATE students SET
+                $sql = "UPDATE studentsk47 SET
                 fname=?, lname=?, date_of_birth=?, course=?, gender=?, status=?, note=?
                 WHERE student_id=?";
 

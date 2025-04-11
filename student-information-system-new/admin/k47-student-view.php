@@ -13,7 +13,7 @@ if (
 
             $student_id = $_GET['student_id'];
 
-            $student = getStudentById($student_id, $conn);
+            $student = getStudentByIdK47($student_id, $conn);
 ?>
             <?php
             include "req/header.php";
@@ -32,7 +32,7 @@ if (
                                 </div>
 
                                 <div class="card-body w-75">
-                                    <h5 class="card-title text-center"><?= $student['fname'] . " " . $student['lname'] ?></h5>
+                                    <h5 class="card-title text-center" style="text-transform: capitalize;'"><?= $student['fname'] ?></h5>
                                 </div>
 
                                 <div class="card-body w-100">
