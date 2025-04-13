@@ -1,0 +1,228 @@
+<?php
+session_start();
+if (
+  isset($_SESSION['admin_id']) &&
+  isset($_SESSION['role'])
+) {
+
+  if ($_SESSION['role'] == 'Admin') {
+    include "../DB_connection.php";
+    include "data/student.php";
+    // include "data/fee.php";
+    $students = getAllStudents($conn);
+
+    // Tính số hồ sơ đã trả
+    $sql = "SELECT * FROM students";
+    $stmt = $conn->query($sql);
+
+    $count = 0;
+
+    if ($stmt->rowCount() > 0) {
+      while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+        // Truy cập dữ liệu theo tên cột
+        // echo $row["note"];
+        $note = $row['note'];
+        if (is_string($note) && !empty($note)) {
+          $count++;
+        }
+      }
+    }
+    // close
+
+    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+    // Truy vấn SQL để đếm số lượng từng trạng thái
+    $sql1 = "SELECT status, COUNT(*) as count FROM students GROUP BY status";
+    $stmt1 = $conn->prepare($sql1);
+    $stmt1->execute();
+
+    // Lấy kết quả dưới dạng mảng kết hợp
+    $result1 = $stmt1->fetchAll(PDO::FETCH_ASSOC);
+    // In kết quả ra màn hình
+?>
+    <?php
+    include "req/header.php";
+    ?>
+
+    <body>
+      <?php
+      include "inc/navbar.php";
+      if ($students != 0) {
+      ?>
+        <div class="container mt-5">
+          <nav style="display: flex; align-items: flex-start; justify-content: space-evenly;">
+            <table style="border-collapse: collapse; width: 30%; margin-bottom: 2rem;">
+              <thead>
+                <tr>
+                  <th style="border: 1px solid #ddd; padding: 8px;">Trạng thái</th>
+                  <th style="border: 1px solid #ddd; padding: 8px;">Số lượng (Hồ sơ)</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="border: 1px solid #ddd; padding: 8px;">Tổng số hồ sơ</td>
+                  <td style="border: 1px solid #ddd; padding: 8px;"><?= count($students) ?></td>
+                </tr>
+                <tr>
+                  <td style="border: 1px solid #ddd; padding: 8px;">Đã rút hồ sơ</td>
+                  <td style="border: 1px solid #ddd; padding: 8px;"><?= $count ?></td>
+                </tr>
+                <tr>
+                  <td style="border: 1px solid #ddd; padding: 8px;">Số hồ sơ còn lại</td>
+                  <td style="border: 1px solid #ddd; padding: 8px;"><?= count($students) - $count ?></td>
+                </tr>
+              </tbody>
+            </table>
+
+            <?php
+            if ($result1) {
+              echo "<table style='border-collapse: collapse; width: 30%; margin-bottom: 2rem;'>";
+              echo
+              "<thead>
+                <tr>
+                  <th style='border: 1px solid #ddd; padding: 8px;'>Tình trạng</th>
+                  <th style='border: 1px solid #ddd; padding: 8px;'>Số lượng (Sinh viên)</th>
+                </tr>
+              </thead>"; // Tiêu đề bảng
+
+              foreach ($result1 as $row) {
+                echo "<tr>";
+                echo "<td style='border: 1px solid #ddd; padding: 8px;'>" . $row['status'] . "</td>";
+                echo "<td style='border: 1px solid #ddd; padding: 8px;'>" . $row['count'] . "</td>";
+                echo "</tr>";
+              }
+              echo "</table>";
+            } else {
+              echo "Không có dữ liệu.";
+            }
+            ?>
+            <div style="display: flex; align-items: center; align-content: center; flex-wrap: wrap; flex-direction: column-reverse; margin-bottom: 2rem;">
+              <div>
+                <a href="#" class="btn btn-primary mt-3">Import Excel</a>
+                <a href="#" class="btn btn-success mt-3">Export Excel</a>
+              </div>
+
+              <a href="student-add.php" class="btn btn-dark mt-3">Thêm sinh viên mới</a>
+
+              <form action="student-search.php" class="n-table" method="get" style="width: 100%;">
+                <div class="input-group mb-3">
+                  <input type="text" class="form-control" name="searchKey" placeholder="Search...">
+                  <button class="btn btn-primary">
+                    <i class="fa fa-search" aria-hidden="true"></i>
+                  </button>
+                </div>
+              </form>
+
+              <!-- <form action="student-search.php" class="n-table" method="get" style="width: 100%;">
+                <div class="input-group mb-3">
+                  <select class="form-select" name="searchKey">
+                    <option value="">Tìm theo</option>
+                    <option value="admission_num">ID Nhập học</option>
+                    <option value="mssv">MSSV</option>
+                    <option value="fname">Họ</option>
+                    <option value="lname">Tên</option>
+                  </select>
+                </div>
+              </form> -->
+            </div>
+          </nav>
+
+
+
+          <?php if (isset($_GET['error'])) { ?>
+            <div class="alert alert-danger mt-3 n-table" role="alert">
+              <?= $_GET['error'] ?>
+            </div>
+          <?php } ?>
+
+          <?php if (isset($_GET['success'])) { ?>
+            <div class="alert alert-info mt-3 n-table" role="alert">
+              <?= $_GET['success'] ?>
+            </div>
+          <?php } ?>
+
+          <div class="table-responsive">
+            <table class="table table-bordered mt-3 n-table" style="max-width: 1600px;">
+              <thead>
+                <tr style="text-align: center;">
+                  <th scope="col">STT</th>
+                  <th scope="col">ID Nhập học</th>
+                  <th scope="col">MSSV</th>
+                  <th scope="col">Họ và tên</th>
+                  <!-- <th scope="col">Username</th> -->
+                  <th scope="col">Ngày sinh</th>
+                  <th scope="col">Khoá học</th>
+                  <th scope="col">Giới tính</th>
+                  <th scope="col">Tình trạng</th>
+                  <th scope="col">Lý do <br> (đã rút hồ sơ)</th>
+                  <th scope="col">Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <?php
+                foreach ($students as $student) {
+                  $std_id = $student['student_id'];
+                  // $fee = getFeeOfStudent($conn, $std_id);
+                  // if ($fee == null) {
+                  //   $fee = 0;
+                  // }
+                ?>
+                  <tr>
+
+                    <td style="text-align: center;"><?= $student['student_id'] ?></td>
+                    <td style="text-align: center;"><?= $student['admission_num'] ?></td>
+                    <td style="text-align: center;"><?= $student['mssv'] ?></td>
+                    <td>
+                      <a href="student-view.php?student_id=<?= $student['student_id'] ?>" style="text-decoration: none;">
+                        <?= $student['fname'] . '&nbsp' . $student['lname'] ?>
+                      </a>
+                    </td>
+
+
+                    <!-- <td><?= $student['username'] ?></td> -->
+                    <td style="text-align: center;"><?= date('d-m-Y', strtotime($student['date_of_birth'])) ?></td>
+                    <td style="text-align: center;"><?= $student['course'] ?></td>
+                    <td style="text-align: center;"><?= $student['gender'] ?></td>
+                    <td><?= $student['status'] ?></td>
+                    <td><?= $student['note'] ?></td>
+
+                    <td style="display: flex; align-items: center; justify-content: space-evenly;">
+                      <a href="student-edit.php?student_id=<?= $student['student_id'] ?>" class="btn btn-warning">Edit</a>
+                      <a href="student-delete.php?student_id=<?= $student['student_id'] ?>" class="btn btn-danger">Delete</a>
+                    </td>
+                  </tr>
+                <?php } ?>
+              </tbody>
+            </table>
+          </div>
+        <?php
+      } else {
+        ?>
+          <div class="alert alert-info .w-450 m-5" role="alert">
+            Empty!
+          </div>
+        <?php } ?>
+        </div>
+
+        <script src="../js/bootstrap.bundle.min.js"></script>
+        <script>
+          $(document).ready(function() {
+            $("#navLinks li:nth-child(2) a").addClass('active');
+          });
+        </script>
+
+    </body>
+
+    </html>
+<?php
+
+  } else {
+    header("Location: ../login.php");
+    exit;
+  }
+} else {
+  header("Location: ../login.php");
+  exit;
+}
+
+?>

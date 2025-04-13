@@ -1,0 +1,153 @@
+<?php
+session_start();
+if (
+    isset($_SESSION['admin_id']) &&
+    isset($_SESSION['role'])
+) {
+
+    if ($_SESSION['role'] == 'Admin') {
+
+        if (
+            isset($_POST['student_id']) &&
+            isset($_POST['fname']) &&
+            isset($_POST['date_of_birth']) &&
+            isset($_POST['course']) &&
+            isset($_POST['gender']) &&
+            isset($_POST['status']) &&
+            isset($_POST['note'])
+        ) {
+
+            include '../../DB_connection.php';
+            include "../data/student.php";
+
+            $student_id = $_POST['student_id'];
+            $fname = $_POST['fname'];
+            $date_of_birth = $_POST['date_of_birth'];
+            $course = $_POST['course'];
+            $gender = $_POST['gender'];
+            $status = $_POST['status'];
+            $note = $_POST['note'];
+            $data = 'student_id=' . $student_id;
+
+            // Hàm xác định bảng theo khóa học
+            function getTableByCourse($course)
+            {
+                $course = strtolower(trim($course));
+                if ($course === 'k50') return 'students'; // bảng mặc định
+                return 'students' . $course;
+            }
+
+            function formatCourse($course)
+            {
+                $course = strtoupper(trim($course)); // chuyển "k47" thành "K47"
+                if (strpos($course, 'K') === 0) {
+                    return 'Khóa ' . substr($course, 1); // "K47" -> "Khóa 47"
+                }
+                return $course;
+            }
+
+            // 📌 Dò xem sinh viên đang nằm ở bảng nào
+            $allTables = ['students', 'studentsk43', 'studentsk44', 'studentsk45', 'studentsk46', 'studentsk47', 'studentsk48', 'studentsk49', 'studentsk50', 'studentsk51'];
+            $student = null;
+            $current_table = null;
+
+            foreach ($allTables as $table) {
+                $student = getStudentByIdFromTable($student_id, $table, $conn);
+                if ($student) {
+                    $current_table = $table;
+                    break;
+                }
+            }
+
+            if (!$student || !$current_table) {
+                $em = "Không tìm thấy sinh viên trong bất kỳ bảng nào!";
+                header("Location: ../student.php?error=$em");
+                exit;
+            }
+
+            if (empty($fname) || empty($date_of_birth) || empty($course) || empty($gender) || empty($status)) {
+                $em = "Vui lòng điền đầy đủ thông tin!";
+                header("Location: ../student-edit.php?error=$em&$data");
+                exit;
+            }
+
+            $current_course = strtolower($current_table === 'students' ? 'k50' : substr($current_table, 8));
+            // $current_course = strtolower($student['course']);
+            $new_course = strtolower($course);
+            // $current_table = getTableByCourse($current_course);
+
+            $new_table = getTableByCourse($new_course);
+
+            // Nếu thay đổi khóa học → di chuyển giữa các bảng
+            if ($current_course !== $new_course) {
+                try {
+                    $conn->beginTransaction();
+
+                    // 1. Insert vào bảng mới
+                    $sql_insert = "INSERT INTO $new_table 
+                        (admission_num, mssv, fname, date_of_birth, course, gender, status, note, course_ori, profile_num, bookgraduate_num, date_graduate)
+                        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+
+                    $stmt_insert = $conn->prepare($sql_insert);
+                    $stmt_insert->execute([
+                        $student['admission_num'],
+                        $student['mssv'],
+                        $student['fname'],
+                        // $fname,
+                        $date_of_birth,
+                        strtoupper($new_course),
+                        $gender,
+                        $status,
+                        $note,
+                        // strtoupper($current_course),
+                        $student['course_ori'], // ✅ giữ nguyên course_ori
+                        $student['profile_num'],
+                        $student['bookgraduate_num'],
+                        $student['date_graduate']
+                    ]);
+
+                    // 2. Xoá khỏi bảng cũ
+                    $sql_delete = "DELETE FROM $current_table WHERE student_id=?";
+                    $stmt_delete = $conn->prepare($sql_delete);
+                    $stmt_delete->execute([$student_id]);
+
+                    $conn->commit();
+                    // $sm = "Đã chuyển sinh viên từ $current_course sang $new_course thành công!";
+                    // $sm = "Đã chuyển sinh viên từ " . formatCourse($current_course) . " sang " . formatCourse($new_course) . " thành công!";
+                    $sm = "Sinh viên '" . ucwords(strtolower($student['fname'])) . "' (MSSV: " . $student['mssv'] . ") đã được chuyển từ " . formatCourse($current_course) . " sang " . formatCourse($new_course) . " thành công!";
+                    // Sinh viên 'Dương Quá' (MSSV: 31251022912) đã được chuyển từ Khóa 48 sang Khóa 50 thành công!
+
+                    header("Location: ../student.php?success=$sm");
+                    exit;
+                } catch (Exception $e) {
+                    $conn->rollBack();
+                    $em = "Lỗi khi chuyển dữ liệu: " . $e->getMessage();
+                    header("Location: ../student-edit.php?error=$em&$data");
+                    exit;
+                }
+            } else {
+                // Nếu không thay đổi khoá → cập nhật bình thường
+                $sql = "UPDATE $current_table SET
+                            fname=?, date_of_birth=?, course=?, gender=?, status=?, note=?
+                        WHERE student_id=?";
+
+                $stmt = $conn->prepare($sql);
+                $stmt->execute([$fname, $date_of_birth, $course, $gender, $status, $note, $student_id]);
+
+                $sm = "Cập nhật thông tin thành công!";
+                header("Location: ../student-edit.php?success=$sm&$data");
+                exit;
+            }
+        } else {
+            $em = "Thiếu dữ liệu!";
+            header("Location: ../student.php?error=$em");
+            exit;
+        }
+    } else {
+        header("Location: ../../logout.php");
+        exit;
+    }
+} else {
+    header("Location: ../../logout.php");
+    exit;
+}
