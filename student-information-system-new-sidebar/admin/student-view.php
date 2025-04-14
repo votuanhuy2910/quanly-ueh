@@ -24,7 +24,7 @@ if (
         include "inc/navbar.php";
         if ($student != 0) {
         ?>
-          <div class="container mt-5">
+          <div class="mt-5">
             <div class="d-flex justify-content-center align-items-center">
               <div class="card w-50 mb-5 justify-content-center align-items-center">
                 <div class="w-25 mt-5">
@@ -44,6 +44,7 @@ if (
                     <li class="list-group-item">Khóa gốc: <span class="fw-bold"><?= $student['course_ori'] ?></span></li>
                     <li class="list-group-item">ID Nhập học: <span class="fw-bold"><?= $student['admission_num'] ?></span></li>
                     <li class="list-group-item">Tình trạng: <span class="fw-bold"><?= $student['status'] ?></span></li>
+                    <li class="list-group-item">Lý do (rút hồ sơ): <span class="fw-bold"><?= $student['note'] ?></span></li>
                     <li class="list-group-item">Ghi chú: <span class="fw-bold"><?= $student['note_special'] ?></span></li>
                   </ul>
                 </div>
@@ -63,8 +64,12 @@ if (
 
         <script src="../js/bootstrap.bundle.min.js"></script>
         <script>
-          $(document).ready(function() {
-            $("#navLinks li:nth-child(2) a").addClass('active');
+          document.addEventListener("DOMContentLoaded", function() {
+            // const navLinks = document.querySelectorAll("#navLinks li:nth-child(2) a");
+            const navLinks = document.querySelectorAll("#navLinks a:nth-child(2)");
+            if (navLinks.length > 0) {
+              navLinks[0].classList.add('active');
+            }
           });
         </script>
 

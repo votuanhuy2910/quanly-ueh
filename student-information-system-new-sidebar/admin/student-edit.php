@@ -31,14 +31,14 @@ if (
       <?php
       include "inc/navbar.php";
       ?>
-      <div class="container mt-5">
+      <div class="mt-5">
         <a href="student.php"
           class="btn btn-dark">Quay lại</a>
 
         <form method="post"
           class="shadow p-3 mt-5 form-w"
           action="req/edit_dispatcher.php">
-          <h3>Chỉnh sửa thông tin sinh viên</h3>
+          <h1>CHỈNH SỬA THÔNG TIN SINH VIÊN</h1>
           <hr>
           <?php if (isset($_GET['error'])) { ?>
             <div class="alert alert-danger" role="alert">
@@ -51,14 +51,14 @@ if (
             </div>
           <?php } ?>
           <div class="mb-3">
-            <label class="form-label">Họ và tên</label>
+            <label class="form-label fw-bold">Họ và tên</label>
             <input type="text"
               class="form-control"
               value="<?= $student['fname'] ?>"
               name="fname">
           </div>
           <div class="mb-3">
-            <label class="form-label">Mã số sinh viên</label>
+            <label class="form-label fw-bold">Mã số sinh viên</label>
             <input type="text"
               class="form-control"
               value="<?= $student['mssv'] ?>"
@@ -66,7 +66,7 @@ if (
               disabled>
           </div>
           <div class="mb-3">
-            <label class="form-label">ID Nhập học</label>
+            <label class="form-label fw-bold">ID Nhập học</label>
             <input type="text"
               class="form-control"
               value="<?= $student['admission_num'] ?>"
@@ -74,14 +74,22 @@ if (
               disabled>
           </div>
           <div class="mb-3">
-            <label class="form-label">Ngày/Tháng/Năm sinh</label>
+            <label class="form-label fw-bold">Mã hồ sơ</label>
+            <input type="text"
+              class="form-control"
+              value="<?= $student['profile_num'] ?>"
+              name="admission_num"
+              disabled>
+          </div>
+          <div class="mb-3">
+            <label class="form-label fw-bold">Ngày/Tháng/Năm sinh</label>
             <input type="date"
               class="form-control"
               value="<?= $student['date_of_birth'] ?>"
               name="date_of_birth">
           </div>
           <div class="mb-3">
-            <label class="form-label">Giới tính</label><br>
+            <label class="form-label fw-bold">Giới tính</label><br>
             <input type="radio"
               value="Nam"
               <?php if ($student['gender'] == 'Nam') echo 'checked';  ?>
@@ -94,7 +102,7 @@ if (
           </div>
 
           <div class="mb-3">
-            <label class="form-label">Khóa học</label>
+            <label class="form-label fw-bold">Khóa học</label>
             <select class="form-control" name="course">
               <option <?php if ($student['course'] == "K51") echo "selected"; ?>>K51</option>
               <option <?php if ($student['course'] == "K50") echo "selected"; ?>>K50</option>
@@ -107,9 +115,19 @@ if (
               <option <?php if ($student['course'] == "K43") echo "selected"; ?>>K43</option>
             </select>
           </div>
-          
+
           <div class="mb-3">
-            <label class="form-label">Tình trạng</label>
+            <label class="form-label fw-bold">Khóa học gốc</label>
+            <input type="text"
+              class="form-control"
+              value="<?= $student['course_ori'] ?>"
+              name="course_ori"
+              disabled>
+            </select>
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label fw-bold">Tình trạng</label>
             <select class="form-control" name="status">
               <option <?php if ($student['status'] == "Còn học") echo "selected"; ?>>Còn học</option>
               <option <?php if ($student['status'] == "Chuyển trường") echo "selected"; ?>>Chuyển trường</option>
@@ -122,11 +140,18 @@ if (
           </div>
 
           <div class="mb-3">
-            <label class="form-label">Lý do</label>
+            <label class="form-label fw-bold">Lý do (rút hồ sơ)</label>
             <input type="text"
               class="form-control"
               value="<?= $student['note'] ?>"
               name="note">
+          </div>
+          <div class="mb-3">
+            <label class="form-label fw-bold">Ghi chú</label>
+            <input type="text"
+              class="form-control"
+              value="<?= $student['note_special'] ?>"
+              name="note_special">
           </div>
           <hr>
           <input type="text"
@@ -143,8 +168,12 @@ if (
 
       <script src="../js/bootstrap.bundle.min.js"></script>
       <script>
-        $(document).ready(function() {
-          $("#navLinks li:nth-child(2) a").addClass('active');
+        document.addEventListener("DOMContentLoaded", function() {
+          // const navLinks = document.querySelectorAll("#navLinks li:nth-child(2) a");
+          const navLinks = document.querySelectorAll("#navLinks a:nth-child(2)");
+          if (navLinks.length > 0) {
+            navLinks[0].classList.add('active');
+          }
         });
       </script>
 

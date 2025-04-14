@@ -49,7 +49,7 @@ if (
       include "inc/navbar.php";
       if ($students != 0) {
       ?>
-        <div class="container mt-5" style="max-width: 1600px;">
+        <div class="mt-5" style="max-width: 1600px;">
           <nav style="display: flex; align-items: flex-start; justify-content: space-evenly;">
             <table class="table" style="border-collapse: collapse; width: 30%; margin-bottom: 2rem;">
               <thead>

@@ -1,18 +1,10 @@
 <?php
+function getStudentByIdFromTable($student_id, $table, $conn)
+{
+  $allowedTables = ['students', 'students1', 'students2', 'students3', 'students4', 'students5', 'students6', 'students7', 'students8'];
 
-// hàm hỗ trợ xác định bảng theo khóa học
-// function getTableByCourse($course) {
-//   $course = strtolower(trim($course));
-//   if ($course === 'k50') return 'students'; // bảng gốc
-//   return 'students' . $course; // ví dụ: k47 → studentsk47
-// }
-
-// hàm dùng động tên bảng
-function getStudentByIdFromTable($student_id, $table, $conn) {
-  $allowedTables = ['students', 'studentsk47', 'studentsk48'];
-  
   if (!in_array($table, $allowedTables)) {
-      return 0; // tránh SQL Injection nếu table name không hợp lệ
+    return 0; // tránh SQL Injection nếu table name không hợp lệ
   }
 
   $sql = "SELECT * FROM $table WHERE student_id=?";
@@ -20,7 +12,7 @@ function getStudentByIdFromTable($student_id, $table, $conn) {
   $stmt->execute([$student_id]);
 
   if ($stmt->rowCount() == 1) {
-      return $stmt->fetch();
+    return $stmt->fetch();
   }
   return 0;
 }
@@ -40,9 +32,9 @@ function getAllStudents($conn)
   }
 }
 
-function getAllStudentsK51($conn)
+function getAllStudents1($conn)
 {
-  $sql = "SELECT * FROM students51";
+  $sql = "SELECT * FROM students1";
   $stmt = $conn->prepare($sql);
   $stmt->execute();
 
@@ -410,12 +402,12 @@ function getStudentByIdK43($id, $conn)
 
 
 // Check if the username Unique
-function unameIsUnique($admission_num, $mssv,  $conn, $student_id = 0)
+function unameIsUnique($admission_num, $profile_num, $mssv,  $conn, $student_id = 0)
 {
-  $sql = "SELECT admission_num, mssv, student_id FROM students
-           WHERE admission_num=? AND mssv=?";
+  $sql = "SELECT admission_num, profile_num, mssv, student_id FROM students
+          WHERE admission_num=? AND profile_num=? AND mssv=?";
   $stmt = $conn->prepare($sql);
-  $stmt->execute([$admission_num, $mssv]);
+  $stmt->execute([$admission_num, $profile_num, $mssv]);
 
   if ($student_id == 0) {
     if ($stmt->rowCount() >= 1) {
@@ -683,17 +675,21 @@ function unameIsUniqueK43($admission_num, $mssv,  $conn, $student_id = 0)
 // Search 
 function searchStudents($key, $conn)
 {
-  $key = preg_replace('/(?<!\\\)([%_])/', '\\\$1', $key);
+  $key_escaped = preg_replace('/(?<!\\\)([%_])/', '\\\$1', $key);
+
+  // Tạo key cho LIKE và key cho so sánh chính xác
+  $key_like = "%$key_escaped%";
+  $key_exact = $key;
 
   $sql = "SELECT * FROM students
-            WHERE admission_num LIKE ?
+            WHERE admission_num = ?
                OR mssv = ?
-               OR fname LIKE ?
+               OR fname = ?
                OR status = ?
                OR note LIKE ?";
+
   $stmt = $conn->prepare($sql);
-  $key = "%$key%";
-  $stmt->execute([$key, $key, $key, $key, $key]);
+  $stmt->execute([$key_like, $key_exact, $key_like, $key_exact, $key_like]);
 
   return $stmt->fetchAll(PDO::FETCH_ASSOC); // Trả về tất cả kết quả
 }

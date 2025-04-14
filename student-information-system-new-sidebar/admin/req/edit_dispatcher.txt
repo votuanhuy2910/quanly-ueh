@@ -30,30 +30,25 @@ if (
             $noteSpecial = $_POST['note_special'];
             $data = 'student_id=' . $student_id;
 
-            // Chuyển khóa vào tên bảng dựa theo quy ước students => K51, students1 => K50, ...
+            // Hàm xác định bảng theo khóa học
             function getTableByCourse($course)
             {
                 $course = strtolower(trim($course));
-                if (preg_match('/k(\d+)/', $course, $matches)) {
-                    $year = (int)$matches[1];
-                    $latest = 51;
-                    $offset = $latest - $year;
-                    if ($offset == 0) return 'students';
-                    return 'students' . $offset;
-                }
-                return null;
+                if ($course === 'k51') return 'students'; // bảng mặc định
+                return 'students' . $course;
             }
 
             function formatCourse($course)
             {
-                $course = strtoupper(trim($course));
+                $course = strtoupper(trim($course)); // chuyển "k47" thành "K47"
                 if (strpos($course, 'K') === 0) {
-                    return 'Khóa ' . substr($course, 1);
+                    return 'Khóa ' . substr($course, 1); // "K47" -> "Khóa 47"
                 }
                 return $course;
             }
 
-            $allTables = ['students', 'students1', 'students2', 'students3', 'students4', 'students5', 'students6', 'students7', 'students8'];
+            // 📌 Dò xem sinh viên đang nằm ở bảng nào
+            $allTables = ['students', 'students1', 'students2', 'students3', 'students4', 'students5', 'students6', 'students7', 'studentsk8', 'studentsk9'];
             $student = null;
             $current_table = null;
 
@@ -72,19 +67,24 @@ if (
             }
 
             if (empty($fname) || empty($date_of_birth) || empty($course) || empty($gender) || empty($status)) {
-                $em = "Vui lòng điền đủ đủ thông tin!";
+                $em = "Vui lòng điền đầy đủ thông tin!";
                 header("Location: ../student-edit.php?error=$em&$data");
                 exit;
             }
 
-            $current_course = 'k' . (51 - (int)str_replace('students', '', $current_table));
+            $current_course = strtolower($current_table === 'students' ? 'k50' : substr($current_table, 8));
+            // $current_course = strtolower($student['course']);
             $new_course = strtolower($course);
+            // $current_table = getTableByCourse($current_course);
+
             $new_table = getTableByCourse($new_course);
 
+            // Nếu thay đổi khóa học → di chuyển giữa các bảng
             if ($current_course !== $new_course) {
                 try {
                     $conn->beginTransaction();
 
+                    // 1. Insert vào bảng mới
                     $sql_insert = "INSERT INTO $new_table 
                         (admission_num, mssv, fname, date_of_birth, course, gender, status, note, note_special, course_ori, profile_num, bookgraduate_num, date_graduate)
                         VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
@@ -94,25 +94,30 @@ if (
                         $student['admission_num'],
                         $student['mssv'],
                         $student['fname'],
+                        // $fname,
                         $date_of_birth,
                         strtoupper($new_course),
                         $gender,
                         $status,
                         $note,
                         $noteSpecial,
-                        $student['course_ori'],
+                        // strtoupper($current_course),
+                        $student['course_ori'], // ✅ giữ nguyên course_ori
                         $student['profile_num'],
                         $student['bookgraduate_num'],
                         $student['date_graduate']
                     ]);
 
+                    // 2. Xoá khỏi bảng cũ
                     $sql_delete = "DELETE FROM $current_table WHERE student_id=?";
                     $stmt_delete = $conn->prepare($sql_delete);
                     $stmt_delete->execute([$student_id]);
 
                     $conn->commit();
-
+                    // $sm = "Đã chuyển sinh viên từ $current_course sang $new_course thành công!";
+                    // $sm = "Đã chuyển sinh viên từ " . formatCourse($current_course) . " sang " . formatCourse($new_course) . " thành công!";
                     $sm = "Sinh viên '" . ucwords(strtolower($student['fname'])) . "' (MSSV: " . $student['mssv'] . ") đã được chuyển từ " . formatCourse($current_course) . " sang " . formatCourse($new_course) . " thành công!";
+                    // Sinh viên 'Dương Quá' (MSSV: 31251022912) đã được chuyển từ Khóa 48 sang Khóa 50 thành công!
 
                     header("Location: ../student.php?success=$sm");
                     exit;
@@ -123,6 +128,7 @@ if (
                     exit;
                 }
             } else {
+                // Nếu không thay đổi khoá → cập nhật bình thường
                 $sql = "UPDATE $current_table SET
                             fname=?, date_of_birth=?, course=?, gender=?, status=?, note=?, note_special=?
                         WHERE student_id=?";

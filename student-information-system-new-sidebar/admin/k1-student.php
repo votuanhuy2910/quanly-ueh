@@ -9,10 +9,10 @@ if (
         include "../DB_connection.php";
         include "data/student.php";
 
-        $students = getAllStudentsK48($conn);
+        $students = getAllStudents1($conn);
 
         // Tính số hồ sơ đã trả
-        $sql = "SELECT * FROM studentsk48";
+        $sql = "SELECT * FROM students1";
         $stmt = $conn->query($sql);
 
         $count = 0;
@@ -32,7 +32,7 @@ if (
         $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
         // Truy vấn SQL để đếm số lượng từng trạng thái
-        $sql1 = "SELECT status, COUNT(*) as count FROM studentsk48 GROUP BY status";
+        $sql1 = "SELECT status, COUNT(*) as count FROM students1 GROUP BY status";
         $stmt1 = $conn->prepare($sql1);
         $stmt1->execute();
 
@@ -57,9 +57,9 @@ if (
                                 <a href="#" class="btn btn-success mt-3">Export Excel</a>
                             </div>
 
-                            <a href="k48-student-add.php" class="btn btn-dark mt-3">Thêm sinh viên mới</a>
+                            <a href="k47-student-add.php" class="btn btn-dark mt-3">Thêm sinh viên mới</a>
 
-                            <form action="k48-student-search.php" class="n-table" method="get" style="width: 100%;">
+                            <form action="k1-student-search.php" class="n-table" method="get" style="width: 100%;">
                                 <div class="input-group mb-3">
                                     <input type="text" class="form-control" name="searchKey" placeholder="Search...">
                                     <button class="btn btn-primary">
@@ -91,13 +91,13 @@ if (
                     $start = ($page - 1) * $limit;
 
                     // Fetch limited students for the current page
-                    $sql_paginated = "SELECT * FROM studentsk48 LIMIT $start, $limit";
+                    $sql_paginated = "SELECT * FROM students1 LIMIT $start, $limit";
                     $stmt_paginated = $conn->prepare($sql_paginated);
                     $stmt_paginated->execute();
                     $students_paginated = $stmt_paginated->fetchAll(PDO::FETCH_ASSOC);
 
                     // Get total number of students for pagination
-                    $sql_total = "SELECT COUNT(*) as total FROM studentsk48";
+                    $sql_total = "SELECT COUNT(*) as total FROM students1";
                     $stmt_total = $conn->prepare($sql_total);
                     $stmt_total->execute();
                     $total_students = $stmt_total->fetch(PDO::FETCH_ASSOC)['total'];
@@ -108,41 +108,43 @@ if (
                         echo "<table class='table table-bordered mt-3 n-table' style='max-width: 1600px;'>";
                         echo "<thead>
                             <tr style='text-align: center;'>
-                    <th scope='col'>STT</th>
-                    <th scope='col'>ID Nhập học</th>
-                    <th scope='col'>MSSV</th>
-                    <th scope='col'>Họ và tên</th>
-                    <th scope='col'>Ngày sinh</th>
-                    <th scope='col'>Khoá học</th>
-                    <th scope='col'>Khoá gốc</th>
-                    <th scope='col'>Mã hồ sơ</th>
-                    <th scope='col'>Số vào sổ</th>
-                    <th scope='col'>Ngày tốt nghiệp</th>
-                    <th scope='col'>Tình trạng</th>
-                    <th scope='col'>Lý do <br> (đã rút hồ sơ)</th>
-                    <th scope='col'>Action</th>
-                  </tr>
+                                <th scope='col'>STT</th>
+                                <th scope='col'>ID Nhập học</th>
+                                <th scope='col'>MSSV</th>
+                                <th scope='col'>Họ và tên</th>
+                                <th scope='col'>Ngày sinh</th>
+                                <th scope='col'>Khoá học</th>
+                                <th scope='col'>Khoá gốc</th>
+                                <th scope='col'>Mã hồ sơ</th>
+                                <th scope='col'>Số vào sổ</th>
+                                <th scope='col'>Ngày tốt nghiệp</th>
+                                <th scope='col'>Tình trạng</th>
+                                <th scope='col'>Lý do <br> (đã rút hồ sơ)</th>
+                                <th scope='col'>Ghi chú</th>
+                                <th scope='col'>Action</th>
+                            </tr>
                         </thead>";
                         echo "<tbody>";
                         foreach ($students_paginated as $student) {
                             echo "<tr>
-                                <td style='text-align: center;'>{$student['student_id']}</td>
-                      <td style='text-align: center;'>{$student['admission_num']}</td>
-                      <td style='text-align: center;'>{$student['mssv']}</td>
-                      <td><a href='k48-student-view.php?student_id={$student['student_id']}' style='text-decoration: none; text-transform: capitalize;'>{$student['fname']}</a></td>
-                      <td style='text-align: center;'>" . date('d-m-Y', strtotime($student['date_of_birth'])) . "</td>
-                      <td style='text-align: center;'>{$student['course']}</td>
-                      <td style='text-align: center;'>{$student['course_ori']}</td>
-                      <td style='text-align: center;'>{$student['profile_num']}</td>
-                      <td style='text-align: center;'>{$student['bookgraduate_num']}</td>
-                      <td style='text-align: center;'>" . date('d-m-Y', strtotime($student['date_graduate'])) . "</td>
-                      <td>{$student['status']}</td>
-                      <td>{$student['note']}</td>
-                      <td style='display: flex; align-items: center; justify-content: space-evenly;'>
-                        <a href='k48-student-edit.php?student_id={$student['student_id']}' class='btn btn-warning'>Edit</a>
-                        <a href='k48-student-delete.php?student_id={$student['student_id']}' class='btn btn-danger'>Delete</a>
-                      </td>
-                            </tr>";
+                                    <td style='text-align: center;border: 1px solid #ddd; padding: 8px;'>{$student['student_id']}</td>
+                                    <td style='text-align: center;border: 1px solid #ddd; padding: 8px;'>{$student['admission_num']}</td>
+                                    <td style='text-align: center;border: 1px solid #ddd; padding: 8px;'>{$student['mssv']}</td>
+                                    <td style='text-align: center;border: 1px solid #ddd; padding: 8px;'><a href='student-view.php?student_id={$student['student_id']}' style='text-decoration: none; text-transform: capitalize; color: #007bff'>{$student['fname']}</a></td>
+                                    <td style='text-align: center;'>" . date('d-m-Y', strtotime($student['date_of_birth'])) . "</td>
+                                    <td style='text-align: center;border: 1px solid #ddd; padding: 8px;'>{$student['course']}</td>
+                                    <td style='text-align: center;border: 1px solid #ddd; padding: 8px;'>{$student['course_ori']}</td>
+                                    <td style='text-align: center;border: 1px solid #ddd; padding: 8px;'>{$student['profile_num']}</td>
+                                    <td style='text-align: center;border: 1px solid #ddd; padding: 8px;'>{$student['bookgraduate_num']}</td>
+                                    <td style='text-align: center;border: 1px solid #ddd; padding: 8px;'>" . (!empty($student['date_graduate']) ? date('d-m-Y', strtotime($student['date_graduate'])) : '') . "</td>
+                                    <td style='text-align: center;border: 1px solid #ddd; padding: 8px;'>{$student['status']}</td>
+                                    <td style='text-align: center;border: 1px solid #ddd; padding: 8px;'>{$student['note']}</td>
+                                    <td style='text-align: center;border: 1px solid #ddd; padding: 8px; white-space: nowrap; overflow: hidden;text-overflow: ellipsis;max-width: 160px;'>{$student['note_special']}</td>
+                                    <td style='display: flex; align-items: center; justify-content: space-evenly; border-right: 1px solid #ddd; padding: 8px;'>
+                                        <a href='student-edit.php?student_id={$student['student_id']}' class='btn btn-warning'>Edit</a>
+                                        <a href='student-delete.php?student_id={$student['student_id']}' class='btn btn-danger'>Delete</a>
+                                    </td>
+                                </tr>";
                         }
                         echo "</tbody>";
                         echo "</table>";
@@ -208,27 +210,13 @@ if (
                 </div>
 
                 <script src="../../js/bootstrap.bundle.min.js"></script>
-                <!-- <script>
-                    $(document).ready(function() {
-                        $("#navLinks li:nth-child(6) a").addClass('active');
-                    });
-                </script> -->
+
                 <script>
                     document.addEventListener("DOMContentLoaded", function() {
-                        const navLinks = document.querySelectorAll("#navLinks li:nth-child(6) a");
+                        const navLinks = document.querySelectorAll("#navLinks a:nth-child(3)");
                         if (navLinks.length > 0) {
                             navLinks[0].classList.add('active');
                         }
-
-                        // Add custom CSS for the 'active' class
-                        const style = document.createElement('style');
-                        style.textContent = `
-              .active {
-              color: #fff !important;
-              background-color: #007bff !important;
-              border-radius: 5px;
-              }
-            `;
                         document.head.appendChild(style);
                     });
                 </script>
