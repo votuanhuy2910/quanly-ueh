@@ -111,3 +111,10 @@ textarea {
 .t_width tr td{
 	width: 70px;
 }
+
+.ellipsis-cell {
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	max-width: 160px; /* Adjust this value as needed */
+}

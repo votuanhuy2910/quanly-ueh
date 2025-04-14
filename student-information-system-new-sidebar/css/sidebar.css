@@ -1,5 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=Source+Code+Pro:ital,wght@0,200..900;1,200..900&display=swap');
-
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
 
 :root{
@@ -52,7 +50,7 @@ body{
     height: 100vh;
     font-family: "Montserrat", monospace;
     font-size: 0.88rem;
-    user-select: none;
+    user-select: text;
     overflow-x: hidden;
     color: var(--color-dark);
     background-color: var(--color-background);
@@ -127,6 +125,7 @@ b{
 }
 
 aside{
+    user-select: none;
     height: 100vh;
 }
 
@@ -161,7 +160,6 @@ aside .sidebar{
     flex-direction: column;
     background-color: var(--color-white);
     box-shadow: var(--box-shadow);
-    /* border-radius: 15px; */
     border-bottom-left-radius: 0px;
     border-bottom-right-radius: 0px;
     border-top-left-radius: 15px;
@@ -208,6 +206,10 @@ aside .sidebar a.active{
     transition: all 0.3s ease;
 }
 
+aside .sidebar a.active h3{
+    font-weight: bold;
+}
+
 aside .sidebar a:first-child.active {
     border-top-right-radius: 15px;
     border-top-left-radius: 15px;
@@ -230,6 +232,10 @@ aside .sidebar a:hover{
     color: var(--color-primary);
 }
 
+aside .sidebar a:hover h3{
+    font-weight: bold;
+}
+
 aside .sidebar a:hover span{
     margin-left: 0.6rem;
 }
@@ -243,7 +249,9 @@ aside .sidebar .message-count{
 }
 
 main{
-    margin-top: 1.4rem;
+    /* margin-top: 1.4rem; */
+    font-size: 1rem;
+
 }
 
 main .analyse{
@@ -401,7 +409,8 @@ main .recent-orders a{
 }
 
 .right-section{
-    /* margin-top: 1.4rem; */
+    margin-top: 1.4rem;
+    user-select: none;
 }
 
 .right-section .nav{
@@ -634,9 +643,9 @@ main .recent-orders a{
     }
 
     @keyframes showMenu {
-       to{
+        to{
         left: 0;
-       } 
+        }
     }
 
     aside .logo{

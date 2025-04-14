@@ -32,17 +32,19 @@ if (
                 </div>
 
                 <div class="card-body w-75">
-                  <h5 class="card-title text-center"><?= $student['fname'] ?></h5>
+                  <h5 class="card-title text-center fw-bold"><?= $student['fname'] ?></h5>
                 </div>
 
                 <div class="card-body w-100">
                   <ul class="list-group list-group-flush ">
-                    <li class="list-group-item">ID Nhập học: <?= $student['admission_num'] ?></li>
-                    <li class="list-group-item">MSSV: <?= $student['mssv'] ?></li>
-                    <li class="list-group-item">Ngày sinh: <?= date('d-m-Y', strtotime($student['date_of_birth'])) ?></li>
-                    <li class="list-group-item">Giới tính: <?= $student['gender'] ?></li>
-                    <li class="list-group-item">Khóa: <?= $student['course'] ?></li>
-                    <li class="list-group-item">Tình trạng: <?= $student['status'] ?></li>
+                    <li class="list-group-item">MSSV: <span class="fw-bold"><?= $student['mssv'] ?></span></li>
+                    <li class="list-group-item">Ngày sinh: <span class="fw-bold"><?= date('d-m-Y', strtotime($student['date_of_birth'])) ?></span></li>
+                    <li class="list-group-item">Giới tính: <span class="fw-bold"><?= $student['gender'] ?></span></li>
+                    <li class="list-group-item">Khóa: <span class="fw-bold"><?= $student['course'] ?></span></li>
+                    <li class="list-group-item">Khóa gốc: <span class="fw-bold"><?= $student['course_ori'] ?></span></li>
+                    <li class="list-group-item">ID Nhập học: <span class="fw-bold"><?= $student['admission_num'] ?></span></li>
+                    <li class="list-group-item">Tình trạng: <span class="fw-bold"><?= $student['status'] ?></span></li>
+                    <li class="list-group-item">Ghi chú: <span class="fw-bold"><?= $student['note_special'] ?></span></li>
                   </ul>
                 </div>
 
