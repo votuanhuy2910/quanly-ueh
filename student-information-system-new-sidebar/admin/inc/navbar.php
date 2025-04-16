@@ -23,45 +23,45 @@
                 </span>
                 <h3>Trang chủ</h3>
             </a>
-            <a href="student.php">
+            <a href="#">
                 <span class="material-icons-sharp">
                     insights
                 </span>
                 <h3>Thống kê số lượng</h3>
             </a>
-            <a href="k1-student.php">
+            <a href="student.php">
                 <span><i class="fa-solid fa-1"></i></span>
                 <h3>KHÓA 51</h3>
             </a>
-            <a href="k2-student.php">
+            <a href="k1-student.php">
                 <span><i class="fa-solid fa-2"></i></span>
                 <h3>KHÓA 50</h3>
             </a>
-            <a href="k3-student.php">
+            <a href="k2-student.php">
                 <span><i class="fa-solid fa-3"></i></span>
                 <h3>KHÓA 49</h3>
             </a>
-            <a href="k4-student.php">
+            <a href="k3-student.php">
                 <span><i class="fa-solid fa-4"></i></span>
                 <h3>KHÓA 48</h3>
             </a>
-            <a href="k5-student.php">
+            <a href="k4-student.php">
                 <span><i class="fa-solid fa-5"></i></span>
                 <h3>KHÓA 47</h3>
             </a>
-            <a href="k6-student.php">
+            <a href="k5-student.php">
                 <span><i class="fa-solid fa-6"></i></span>
                 <h3>KHÓA 46</h3>
             </a>
-            <a href="k7-student.php">
+            <a href="k6-student.php">
                 <span><i class="fa-solid fa-7"></i></span>
                 <h3>KHÓA 45</h3>
             </a>
-            <a href="k8-student.php">
+            <a href="k7-student.php">
                 <span><i class="fa-solid fa-8"></i></span>
                 <h3>KHÓA 44</h3>
             </a>
-            <a href="k9-student.php">
+            <a href="k8-student.php">
                 <!-- <span class="material-icons-sharp">
                     receipt_long
                 </span> -->

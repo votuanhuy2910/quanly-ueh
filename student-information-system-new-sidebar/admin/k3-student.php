@@ -9,10 +9,10 @@ if (
         include "../DB_connection.php";
         include "data/student.php";
 
-        $students = getAllStudents1($conn);
+        $students = getAllStudents3($conn);
 
         // Tính số hồ sơ đã trả
-        $sql = "SELECT * FROM students1";
+        $sql = "SELECT * FROM students3";
         $stmt = $conn->query($sql);
 
         $count = 0;
@@ -32,7 +32,7 @@ if (
         $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
         // Truy vấn SQL để đếm số lượng từng trạng thái
-        $sql1 = "SELECT status, COUNT(*) as count FROM students1 GROUP BY status";
+        $sql1 = "SELECT status, COUNT(*) as count FROM students3 GROUP BY status";
         $stmt1 = $conn->prepare($sql1);
         $stmt1->execute();
 
@@ -136,13 +136,13 @@ if (
                     $start = ($page - 1) * $limit;
 
                     // Fetch limited students for the current page
-                    $sql_paginated = "SELECT * FROM students1 LIMIT $start, $limit";
+                    $sql_paginated = "SELECT * FROM students3 LIMIT $start, $limit";
                     $stmt_paginated = $conn->prepare($sql_paginated);
                     $stmt_paginated->execute();
                     $students_paginated = $stmt_paginated->fetchAll(PDO::FETCH_ASSOC);
 
                     // Get total number of students for pagination
-                    $sql_total = "SELECT COUNT(*) as total FROM students1";
+                    $sql_total = "SELECT COUNT(*) as total FROM students3";
                     $stmt_total = $conn->prepare($sql_total);
                     $stmt_total->execute();
                     $total_students = $stmt_total->fetch(PDO::FETCH_ASSOC)['total'];
@@ -258,7 +258,7 @@ if (
                 <script src="../js/scripts.js"></script>
                 <script>
                     document.addEventListener("DOMContentLoaded", function() {
-                        const navLinks = document.querySelectorAll("#navLinks a:nth-child(4)");
+                        const navLinks = document.querySelectorAll("#navLinks a:nth-child(6)");
                         if (navLinks.length > 0) {
                             navLinks[0].classList.add('active');
                         }

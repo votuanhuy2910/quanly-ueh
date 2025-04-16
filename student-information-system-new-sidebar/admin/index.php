@@ -18,7 +18,7 @@ if (
             <div class="text-center mt-5">
                 <h1 class="text-center">Chào mừng bạn đến với trang quản trị</h1>
                 <div class="row row-cols-4">
-                    <a href="student.php" class="col btn btn-dark m-2 py-3">
+                    <a href="#" class="col btn btn-dark m-2 py-3">
                         <i class="fa fa-graduation-cap fs-1" aria-hidden="true"></i><br>
                         Thống kê số lượng hồ sơ
                     </a>

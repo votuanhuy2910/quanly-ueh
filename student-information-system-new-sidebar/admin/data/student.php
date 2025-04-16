@@ -46,9 +46,9 @@ function getAllStudents1($conn)
   }
 }
 
-function getAllStudentsK50($conn)
+function getAllStudents2($conn)
 {
-  $sql = "SELECT * FROM students50";
+  $sql = "SELECT * FROM students2";
   $stmt = $conn->prepare($sql);
   $stmt->execute();
 
@@ -60,9 +60,9 @@ function getAllStudentsK50($conn)
   }
 }
 
-function getAllStudentsK49($conn)
+function getAllStudents3($conn)
 {
-  $sql = "SELECT * FROM students49";
+  $sql = "SELECT * FROM students3";
   $stmt = $conn->prepare($sql);
   $stmt->execute();
 
@@ -74,37 +74,9 @@ function getAllStudentsK49($conn)
   }
 }
 
-function getAllStudentsK48($conn)
+function getAllStudents4($conn)
 {
-  $sql = "SELECT * FROM studentsk48";
-  $stmt = $conn->prepare($sql);
-  $stmt->execute();
-
-  if ($stmt->rowCount() >= 1) {
-    $students48 = $stmt->fetchAll();
-    return $students48;
-  } else {
-    return 0;
-  }
-}
-
-function getAllStudentsK47($conn)
-{
-  $sql = "SELECT * FROM studentsk47";
-  $stmt = $conn->prepare($sql);
-  $stmt->execute();
-
-  if ($stmt->rowCount() >= 1) {
-    $studentsk48 = $stmt->fetchAll();
-    return $studentsk48;
-  } else {
-    return 0;
-  }
-}
-
-function getAllStudentsK46($conn)
-{
-  $sql = "SELECT * FROM students46";
+  $sql = "SELECT * FROM students4";
   $stmt = $conn->prepare($sql);
   $stmt->execute();
 
@@ -116,9 +88,23 @@ function getAllStudentsK46($conn)
   }
 }
 
-function getAllStudentsK45($conn)
+function getAllStudents5($conn)
 {
-  $sql = "SELECT * FROM students45";
+  $sql = "SELECT * FROM students5";
+  $stmt = $conn->prepare($sql);
+  $stmt->execute();
+
+  if ($stmt->rowCount() >= 1) {
+    $studentsk = $stmt->fetchAll();
+    return $studentsk;
+  } else {
+    return 0;
+  }
+}
+
+function getAllStudents6($conn)
+{
+  $sql = "SELECT * FROM students6";
   $stmt = $conn->prepare($sql);
   $stmt->execute();
 
@@ -130,9 +116,9 @@ function getAllStudentsK45($conn)
   }
 }
 
-function getAllStudentsK44($conn)
+function getAllStudents7($conn)
 {
-  $sql = "SELECT * FROM students44";
+  $sql = "SELECT * FROM students7";
   $stmt = $conn->prepare($sql);
   $stmt->execute();
 
@@ -144,9 +130,9 @@ function getAllStudentsK44($conn)
   }
 }
 
-function getAllStudentsK43($conn)
+function getAllStudents8($conn)
 {
-  $sql = "SELECT * FROM students43";
+  $sql = "SELECT * FROM students8";
   $stmt = $conn->prepare($sql);
   $stmt->execute();
 
@@ -168,81 +154,72 @@ function removeStudent($id, $conn)
   return $result1;
 }
 
-function removeStudentK51($id, $conn)
+function removeStudent1($id, $conn)
 {
-  $sql1  = "DELETE FROM students51 WHERE student_id=?";
+  $sql1  = "DELETE FROM students1 WHERE student_id=?";
   $stmt1 = $conn->prepare($sql1);
   $result1 = $stmt1->execute([$id]);
 
   return $result1;
 }
 
-function removeStudent50($id, $conn)
+function removeStudent2($id, $conn)
 {
-  $sql1  = "DELETE FROM students50 WHERE student_id=?";
+  $sql1  = "DELETE FROM students2 WHERE student_id=?";
   $stmt1 = $conn->prepare($sql1);
   $result1 = $stmt1->execute([$id]);
 
   return $result1;
 }
 
-function removeStudentK49($id, $conn)
+function removeStudent3($id, $conn)
 {
-  $sql1  = "DELETE FROM students49 WHERE student_id=?";
+  $sql1  = "DELETE FROM students3 WHERE student_id=?";
   $stmt1 = $conn->prepare($sql1);
   $result1 = $stmt1->execute([$id]);
 
   return $result1;
 }
 
-function removeStudentK48($id, $conn)
+function removeStudent4($id, $conn)
 {
-  $sql1  = "DELETE FROM students48 WHERE student_id=?";
+  $sql1  = "DELETE FROM students4 WHERE student_id=?";
   $stmt1 = $conn->prepare($sql1);
   $result1 = $stmt1->execute([$id]);
 
   return $result1;
 }
 
-function removeStudentK47($id, $conn)
+function removeStudent5($id, $conn)
 {
-  $sql1  = "DELETE FROM studentsk47 WHERE student_id=?";
+  $sql1  = "DELETE FROM students5 WHERE student_id=?";
   $stmt1 = $conn->prepare($sql1);
   $result1 = $stmt1->execute([$id]);
 
   return $result1;
 }
 
-function removeStudentK46($id, $conn)
+function removeStudent6($id, $conn)
 {
-  $sql1  = "DELETE FROM students46 WHERE student_id=?";
+  $sql1  = "DELETE FROM students6 WHERE student_id=?";
   $stmt1 = $conn->prepare($sql1);
   $result1 = $stmt1->execute([$id]);
 
   return $result1;
 }
 
-function removeStudentK45($id, $conn)
+function removeStudent7($id, $conn)
 {
-  $sql1  = "DELETE FROM students45 WHERE student_id=?";
+  $sql1  = "DELETE FROM students7 WHERE student_id=?";
   $stmt1 = $conn->prepare($sql1);
   $result1 = $stmt1->execute([$id]);
 
   return $result1;
 }
 
-function removeStudentK44($id, $conn)
+function removeStudent8($id, $conn)
 {
-  $sql1  = "DELETE FROM students44 WHERE student_id=?";
-  $stmt1 = $conn->prepare($sql1);
-  $result1 = $stmt1->execute([$id]);
-
-  return $result1;
-}
-
-function removeStudentK43($id, $conn)
-{
-  $sql1  = "DELETE FROM students43 WHERE student_id=?";
+  $sql1  = "DELETE FROM students8 WHERE student_id=?";
   $stmt1 = $conn->prepare($sql1);
   $result1 = $stmt1->execute([$id]);
 
@@ -265,9 +242,9 @@ function getStudentById($id, $conn)
   }
 }
 
-function getStudentByIdK51($id, $conn)
+function getStudentById1($id, $conn)
 {
-  $sql = "SELECT * FROM students51
+  $sql = "SELECT * FROM students1
            WHERE student_id=?";
   $stmt = $conn->prepare($sql);
   $stmt->execute([$id]);
@@ -280,9 +257,9 @@ function getStudentByIdK51($id, $conn)
   }
 }
 
-function getStudentByIdK50($id, $conn)
+function getStudentById2($id, $conn)
 {
-  $sql = "SELECT * FROM students50
+  $sql = "SELECT * FROM students2
            WHERE student_id=?";
   $stmt = $conn->prepare($sql);
   $stmt->execute([$id]);
@@ -295,9 +272,9 @@ function getStudentByIdK50($id, $conn)
   }
 }
 
-function getStudentByIdK49($id, $conn)
+function getStudentById3($id, $conn)
 {
-  $sql = "SELECT * FROM students49
+  $sql = "SELECT * FROM students3
            WHERE student_id=?";
   $stmt = $conn->prepare($sql);
   $stmt->execute([$id]);
@@ -310,9 +287,9 @@ function getStudentByIdK49($id, $conn)
   }
 }
 
-function getStudentByIdK48($id, $conn)
+function getStudentById4($id, $conn)
 {
-  $sql = "SELECT * FROM studentsk48
+  $sql = "SELECT * FROM students4
            WHERE student_id=?";
   $stmt = $conn->prepare($sql);
   $stmt->execute([$id]);
@@ -325,9 +302,9 @@ function getStudentByIdK48($id, $conn)
   }
 }
 
-function getStudentByIdK47($id, $conn)
+function getStudentById5($id, $conn)
 {
-  $sql = "SELECT * FROM studentsk47
+  $sql = "SELECT * FROM students5
            WHERE student_id=?";
   $stmt = $conn->prepare($sql);
   $stmt->execute([$id]);
@@ -340,9 +317,9 @@ function getStudentByIdK47($id, $conn)
   }
 }
 
-function getStudentByIdK46($id, $conn)
+function getStudentById6($id, $conn)
 {
-  $sql = "SELECT * FROM students46
+  $sql = "SELECT * FROM students6
            WHERE student_id=?";
   $stmt = $conn->prepare($sql);
   $stmt->execute([$id]);
@@ -355,9 +332,9 @@ function getStudentByIdK46($id, $conn)
   }
 }
 
-function getStudentByIdK45($id, $conn)
+function getStudentById7($id, $conn)
 {
-  $sql = "SELECT * FROM students45
+  $sql = "SELECT * FROM students7
            WHERE student_id=?";
   $stmt = $conn->prepare($sql);
   $stmt->execute([$id]);
@@ -370,9 +347,9 @@ function getStudentByIdK45($id, $conn)
   }
 }
 
-function getStudentByIdK44($id, $conn)
+function getStudentByIdK8($id, $conn)
 {
-  $sql = "SELECT * FROM students44
+  $sql = "SELECT * FROM students8
            WHERE student_id=?";
   $stmt = $conn->prepare($sql);
   $stmt->execute([$id]);
@@ -384,22 +361,6 @@ function getStudentByIdK44($id, $conn)
     return 0;
   }
 }
-
-function getStudentByIdK43($id, $conn)
-{
-  $sql = "SELECT * FROM students43
-           WHERE student_id=?";
-  $stmt = $conn->prepare($sql);
-  $stmt->execute([$id]);
-
-  if ($stmt->rowCount() == 1) {
-    $student = $stmt->fetch();
-    return $student;
-  } else {
-    return 0;
-  }
-}
-
 
 // Check if the username Unique
 function unameIsUnique($admission_num, $profile_num, $mssv,  $conn, $student_id = 0)
@@ -429,12 +390,12 @@ function unameIsUnique($admission_num, $profile_num, $mssv,  $conn, $student_id 
   }
 }
 
-function unameIsUniqueK51($admission_num, $mssv,  $conn, $student_id = 0)
+function unameIsUnique1($admission_num, $profile_num, $mssv,  $conn, $student_id = 0)
 {
-  $sql = "SELECT admission_num, mssv, student_id FROM students51
-           WHERE admission_num=? AND mssv=?";
+  $sql = "SELECT admission_num, profile_num, mssv, student_id FROM students1
+          WHERE admission_num=? AND profile_num=? AND mssv=?";
   $stmt = $conn->prepare($sql);
-  $stmt->execute([$admission_num, $mssv]);
+  $stmt->execute([$admission_num, $profile_num, $mssv]);
 
   if ($student_id == 0) {
     if ($stmt->rowCount() >= 1) {
@@ -456,12 +417,12 @@ function unameIsUniqueK51($admission_num, $mssv,  $conn, $student_id = 0)
   }
 }
 
-function unameIsUniqueK50($admission_num, $mssv,  $conn, $student_id = 0)
+function unameIsUnique2($admission_num, $profile_num, $mssv,  $conn, $student_id = 0)
 {
-  $sql = "SELECT admission_num, mssv, student_id FROM students50
-           WHERE admission_num=? AND mssv=?";
+  $sql = "SELECT admission_num, profile_num, mssv, student_id FROM students2
+          WHERE admission_num=? AND profile_num=? AND mssv=?";
   $stmt = $conn->prepare($sql);
-  $stmt->execute([$admission_num, $mssv]);
+  $stmt->execute([$admission_num, $profile_num, $mssv]);
 
   if ($student_id == 0) {
     if ($stmt->rowCount() >= 1) {
@@ -483,12 +444,12 @@ function unameIsUniqueK50($admission_num, $mssv,  $conn, $student_id = 0)
   }
 }
 
-function unameIsUniqueK49($admission_num, $mssv,  $conn, $student_id = 0)
+function unameIsUnique3($admission_num, $profile_num, $mssv,  $conn, $student_id = 0)
 {
-  $sql = "SELECT admission_num, mssv, student_id FROM students49
-           WHERE admission_num=? AND mssv=?";
+  $sql = "SELECT admission_num, profile_num, mssv, student_id FROM students3
+          WHERE admission_num=? AND profile_num=? AND mssv=?";
   $stmt = $conn->prepare($sql);
-  $stmt->execute([$admission_num, $mssv]);
+  $stmt->execute([$admission_num, $profile_num, $mssv]);
 
   if ($student_id == 0) {
     if ($stmt->rowCount() >= 1) {
@@ -510,12 +471,12 @@ function unameIsUniqueK49($admission_num, $mssv,  $conn, $student_id = 0)
   }
 }
 
-function unameIsUniqueK48($admission_num, $mssv,  $conn, $student_id = 0)
+function unameIsUnique4($admission_num, $profile_num, $mssv,  $conn, $student_id = 0)
 {
-  $sql = "SELECT admission_num, mssv, student_id FROM students48
-           WHERE admission_num=? AND mssv=?";
+  $sql = "SELECT admission_num, profile_num, mssv, student_id FROM students4
+          WHERE admission_num=? AND profile_num=? AND mssv=?";
   $stmt = $conn->prepare($sql);
-  $stmt->execute([$admission_num, $mssv]);
+  $stmt->execute([$admission_num, $profile_num, $mssv]);
 
   if ($student_id == 0) {
     if ($stmt->rowCount() >= 1) {
@@ -537,12 +498,12 @@ function unameIsUniqueK48($admission_num, $mssv,  $conn, $student_id = 0)
   }
 }
 
-function unameIsUniqueK47($admission_num, $mssv,  $conn, $student_id = 0)
+function unameIsUnique5($admission_num, $profile_num, $mssv,  $conn, $student_id = 0)
 {
-  $sql = "SELECT admission_num, mssv, student_id FROM students47
-           WHERE admission_num=? AND mssv=?";
+  $sql = "SELECT admission_num, profile_num, mssv, student_id FROM students5
+          WHERE admission_num=? AND profile_num=? AND mssv=?";
   $stmt = $conn->prepare($sql);
-  $stmt->execute([$admission_num, $mssv]);
+  $stmt->execute([$admission_num, $profile_num, $mssv]);
 
   if ($student_id == 0) {
     if ($stmt->rowCount() >= 1) {
@@ -564,12 +525,12 @@ function unameIsUniqueK47($admission_num, $mssv,  $conn, $student_id = 0)
   }
 }
 
-function unameIsUniqueK46($admission_num, $mssv,  $conn, $student_id = 0)
+function unameIsUnique6($admission_num, $profile_num, $mssv,  $conn, $student_id = 0)
 {
-  $sql = "SELECT admission_num, mssv, student_id FROM students46
-           WHERE admission_num=? AND mssv=?";
+  $sql = "SELECT admission_num, profile_num, mssv, student_id FROM students6
+          WHERE admission_num=? AND profile_num=? AND mssv=?";
   $stmt = $conn->prepare($sql);
-  $stmt->execute([$admission_num, $mssv]);
+  $stmt->execute([$admission_num, $profile_num, $mssv]);
 
   if ($student_id == 0) {
     if ($stmt->rowCount() >= 1) {
@@ -591,12 +552,12 @@ function unameIsUniqueK46($admission_num, $mssv,  $conn, $student_id = 0)
   }
 }
 
-function unameIsUniqueK45($admission_num, $mssv,  $conn, $student_id = 0)
+function unameIsUnique7($admission_num, $profile_num, $mssv,  $conn, $student_id = 0)
 {
-  $sql = "SELECT admission_num, mssv, student_id FROM students45
-           WHERE admission_num=? AND mssv=?";
+  $sql = "SELECT admission_num, profile_num, mssv, student_id FROM students7
+          WHERE admission_num=? AND profile_num=? AND mssv=?";
   $stmt = $conn->prepare($sql);
-  $stmt->execute([$admission_num, $mssv]);
+  $stmt->execute([$admission_num, $profile_num, $mssv]);
 
   if ($student_id == 0) {
     if ($stmt->rowCount() >= 1) {
@@ -618,39 +579,12 @@ function unameIsUniqueK45($admission_num, $mssv,  $conn, $student_id = 0)
   }
 }
 
-function unameIsUniqueK44($admission_num, $mssv,  $conn, $student_id = 0)
+function unameIsUnique8($admission_num, $profile_num, $mssv,  $conn, $student_id = 0)
 {
-  $sql = "SELECT admission_num, mssv, student_id FROM students44
-           WHERE admission_num=? AND mssv=?";
+  $sql = "SELECT admission_num, profile_num, mssv, student_id FROM students8
+          WHERE admission_num=? AND profile_num=? AND mssv=?";
   $stmt = $conn->prepare($sql);
-  $stmt->execute([$admission_num, $mssv]);
-
-  if ($student_id == 0) {
-    if ($stmt->rowCount() >= 1) {
-      return 0;
-    } else {
-      return 1;
-    }
-  } else {
-    if ($stmt->rowCount() >= 1) {
-      $student = $stmt->fetch();
-      if ($student['student_id'] == $student_id) {
-        return 1;
-      } else {
-        return 0;
-      }
-    } else {
-      return 1;
-    }
-  }
-}
-
-function unameIsUniqueK43($admission_num, $mssv,  $conn, $student_id = 0)
-{
-  $sql = "SELECT admission_num, mssv, student_id FROM students43
-           WHERE admission_num=? AND mssv=?";
-  $stmt = $conn->prepare($sql);
-  $stmt->execute([$admission_num, $mssv]);
+  $stmt->execute([$admission_num, $profile_num, $mssv]);
 
   if ($student_id == 0) {
     if ($stmt->rowCount() >= 1) {
@@ -683,10 +617,10 @@ function searchStudents($key, $conn)
 
   $sql = "SELECT * FROM students
             WHERE admission_num = ?
-               OR mssv = ?
-               OR fname = ?
-               OR status = ?
-               OR note LIKE ?";
+                OR mssv = ?
+                OR fname = ?
+                OR status = ?
+                OR note LIKE ?";
 
   $stmt = $conn->prepare($sql);
   $stmt->execute([$key_like, $key_exact, $key_like, $key_exact, $key_like]);
@@ -694,171 +628,170 @@ function searchStudents($key, $conn)
   return $stmt->fetchAll(PDO::FETCH_ASSOC); // Trả về tất cả kết quả
 }
 
-function searchStudentsK51($key, $conn)
+function searchStudents1($key, $conn)
 {
-  $key = preg_replace('/(?<!\\\)([%_])/', '\\\$1', $key);
+  $key_escaped = preg_replace('/(?<!\\\)([%_])/', '\\\$1', $key);
 
-  $sql = "SELECT * FROM students51
-            WHERE CAST(student_id AS CHAR) LIKE ?
-               OR admission_num LIKE ?
-               OR mssv LIKE ?
-               OR fname LIKE ?
-               OR lname LIKE ?
-               OR status = ?
-               OR note LIKE ?
-               OR CONCAT(fname, ' ', lname) LIKE ?";
+  // Tạo key cho LIKE và key cho so sánh chính xác
+  $key_like = "%$key_escaped%";
+  $key_exact = $key;
+
+  $sql = "SELECT * FROM students1
+            WHERE admission_num = ?
+                OR mssv = ?
+                OR fname = ?
+                OR status = ?
+                OR note LIKE ?";
+
   $stmt = $conn->prepare($sql);
-  $stmt->execute([$key, $key, $key, $key, $key, $key, $key, $key]);
+  $stmt->execute([$key_like, $key_exact, $key_like, $key_exact, $key_like]);
 
   return $stmt->fetchAll(PDO::FETCH_ASSOC); // Trả về tất cả kết quả
 }
 
-function searchStudentsK50($key, $conn)
+function searchStudents2($key, $conn)
 {
-  $key = preg_replace('/(?<!\\\)([%_])/', '\\\$1', $key);
+  $key_escaped = preg_replace('/(?<!\\\)([%_])/', '\\\$1', $key);
 
-  $sql = "SELECT * FROM students50
-            WHERE CAST(student_id AS CHAR) LIKE ?
-               OR admission_num LIKE ?
-               OR mssv LIKE ?
-               OR fname LIKE ?
-               OR lname LIKE ?
-               OR status = ?
-               OR note LIKE ?
-               OR CONCAT(fname, ' ', lname) LIKE ?";
+  // Tạo key cho LIKE và key cho so sánh chính xác
+  $key_like = "%$key_escaped%";
+  $key_exact = $key;
+
+  $sql = "SELECT * FROM students2
+            WHERE admission_num = ?
+                OR mssv = ?
+                OR fname = ?
+                OR status = ?
+                OR note LIKE ?";
+
   $stmt = $conn->prepare($sql);
-  $stmt->execute([$key, $key, $key, $key, $key, $key, $key, $key]);
+  $stmt->execute([$key_like, $key_exact, $key_like, $key_exact, $key_like]);
 
   return $stmt->fetchAll(PDO::FETCH_ASSOC); // Trả về tất cả kết quả
 }
 
-function searchStudentsK49($key, $conn)
+function searchStudents3($key, $conn)
 {
-  $key = preg_replace('/(?<!\\\)([%_])/', '\\\$1', $key);
+  $key_escaped = preg_replace('/(?<!\\\)([%_])/', '\\\$1', $key);
 
-  $sql = "SELECT * FROM students49
-            WHERE CAST(student_id AS CHAR) LIKE ?
-               OR admission_num LIKE ?
-               OR mssv LIKE ?
-               OR fname LIKE ?
-               OR lname LIKE ?
-               OR status = ?
-               OR note LIKE ?
-               OR CONCAT(fname, ' ', lname) LIKE ?";
+  // Tạo key cho LIKE và key cho so sánh chính xác
+  $key_like = "%$key_escaped%";
+  $key_exact = $key;
+
+  $sql = "SELECT * FROM students3
+            WHERE admission_num = ?
+                OR mssv = ?
+                OR fname = ?
+                OR status = ?
+                OR note LIKE ?";
+
   $stmt = $conn->prepare($sql);
-  $stmt->execute([$key, $key, $key, $key, $key, $key, $key, $key]);
+  $stmt->execute([$key_like, $key_exact, $key_like, $key_exact, $key_like]);
 
   return $stmt->fetchAll(PDO::FETCH_ASSOC); // Trả về tất cả kết quả
 }
 
-function searchStudentsK48($key, $conn)
+function searchStudents4($key, $conn)
 {
-  $key = preg_replace('/(?<!\\\)([%_])/', '\\\$1', $key);
+  $key_escaped = preg_replace('/(?<!\\\)([%_])/', '\\\$1', $key);
 
-  $sql = "SELECT * FROM students48
-            WHERE CAST(student_id AS CHAR) LIKE ?
-               OR admission_num LIKE ?
-               OR mssv LIKE ?
-               OR fname LIKE ?
-               OR lname LIKE ?
-               OR status = ?
-               OR note LIKE ?
-               OR CONCAT(fname, ' ', lname) LIKE ?";
+  // Tạo key cho LIKE và key cho so sánh chính xác
+  $key_like = "%$key_escaped%";
+  $key_exact = $key;
+
+  $sql = "SELECT * FROM students4
+            WHERE admission_num = ?
+                OR mssv = ?
+                OR fname = ?
+                OR status = ?
+                OR note LIKE ?";
+
   $stmt = $conn->prepare($sql);
-  $stmt->execute([$key, $key, $key, $key, $key, $key, $key, $key]);
+  $stmt->execute([$key_like, $key_exact, $key_like, $key_exact, $key_like]);
 
   return $stmt->fetchAll(PDO::FETCH_ASSOC); // Trả về tất cả kết quả
 }
 
-function searchStudentsK47($key, $conn)
+function searchStudents5($key, $conn)
 {
-  $key = preg_replace('/(?<!\\\)([%_])/', '\\\$1', $key);
+  $key_escaped = preg_replace('/(?<!\\\)([%_])/', '\\\$1', $key);
 
-  $sql = "SELECT * FROM studentsk47
-            WHERE admission_num LIKE ?
-               OR mssv = ?
-               OR fname LIKE ?
-               OR status = ?
-               OR note LIKE ?";
+  // Tạo key cho LIKE và key cho so sánh chính xác
+  $key_like = "%$key_escaped%";
+  $key_exact = $key;
+
+  $sql = "SELECT * FROM students5
+            WHERE admission_num = ?
+                OR mssv = ?
+                OR fname = ?
+                OR status = ?
+                OR note LIKE ?";
+
   $stmt = $conn->prepare($sql);
-  $key = "%$key%";
-  $stmt->execute([$key, $key, $key, $key, $key]);
+  $stmt->execute([$key_like, $key_exact, $key_like, $key_exact, $key_like]);
 
   return $stmt->fetchAll(PDO::FETCH_ASSOC); // Trả về tất cả kết quả
 }
 
-function searchStudentsK46($key, $conn)
+function searchStudents6($key, $conn)
 {
-  $key = preg_replace('/(?<!\\\)([%_])/', '\\\$1', $key);
+  $key_escaped = preg_replace('/(?<!\\\)([%_])/', '\\\$1', $key);
 
-  $sql = "SELECT * FROM students46
-            WHERE CAST(student_id AS CHAR) LIKE ?
-               OR admission_num LIKE ?
-               OR mssv LIKE ?
-               OR fname LIKE ?
-               OR lname LIKE ?
-               OR status = ?
-               OR note LIKE ?
-               OR CONCAT(fname, ' ', lname) LIKE ?";
+  // Tạo key cho LIKE và key cho so sánh chính xác
+  $key_like = "%$key_escaped%";
+  $key_exact = $key;
+
+  $sql = "SELECT * FROM students6
+            WHERE admission_num = ?
+                OR mssv = ?
+                OR fname = ?
+                OR status = ?
+                OR note LIKE ?";
+
   $stmt = $conn->prepare($sql);
-  $stmt->execute([$key, $key, $key, $key, $key, $key, $key, $key]);
+  $stmt->execute([$key_like, $key_exact, $key_like, $key_exact, $key_like]);
 
   return $stmt->fetchAll(PDO::FETCH_ASSOC); // Trả về tất cả kết quả
 }
 
-function searchStudentsK45($key, $conn)
+function searchStudents7($key, $conn)
 {
-  $key = preg_replace('/(?<!\\\)([%_])/', '\\\$1', $key);
+  $key_escaped = preg_replace('/(?<!\\\)([%_])/', '\\\$1', $key);
 
-  $sql = "SELECT * FROM students45
-            WHERE CAST(student_id AS CHAR) LIKE ?
-               OR admission_num LIKE ?
-               OR mssv LIKE ?
-               OR fname LIKE ?
-               OR lname LIKE ?
-               OR status = ?
-               OR note LIKE ?
-               OR CONCAT(fname, ' ', lname) LIKE ?";
+  // Tạo key cho LIKE và key cho so sánh chính xác
+  $key_like = "%$key_escaped%";
+  $key_exact = $key;
+
+  $sql = "SELECT * FROM students7
+            WHERE admission_num = ?
+                OR mssv = ?
+                OR fname = ?
+                OR status = ?
+                OR note LIKE ?";
+
   $stmt = $conn->prepare($sql);
-  $stmt->execute([$key, $key, $key, $key, $key, $key, $key, $key]);
+  $stmt->execute([$key_like, $key_exact, $key_like, $key_exact, $key_like]);
 
   return $stmt->fetchAll(PDO::FETCH_ASSOC); // Trả về tất cả kết quả
 }
 
-function searchStudentsK44($key, $conn)
+function searchStudents8($key, $conn)
 {
-  $key = preg_replace('/(?<!\\\)([%_])/', '\\\$1', $key);
+  $key_escaped = preg_replace('/(?<!\\\)([%_])/', '\\\$1', $key);
 
-  $sql = "SELECT * FROM students44
-            WHERE CAST(student_id AS CHAR) LIKE ?
-               OR admission_num LIKE ?
-               OR mssv LIKE ?
-               OR fname LIKE ?
-               OR lname LIKE ?
-               OR status = ?
-               OR note LIKE ?
-               OR CONCAT(fname, ' ', lname) LIKE ?";
+  // Tạo key cho LIKE và key cho so sánh chính xác
+  $key_like = "%$key_escaped%";
+  $key_exact = $key;
+
+  $sql = "SELECT * FROM students8
+            WHERE admission_num = ?
+                OR mssv = ?
+                OR fname = ?
+                OR status = ?
+                OR note LIKE ?";
+
   $stmt = $conn->prepare($sql);
-  $stmt->execute([$key, $key, $key, $key, $key, $key, $key, $key]);
-
-  return $stmt->fetchAll(PDO::FETCH_ASSOC); // Trả về tất cả kết quả
-}
-
-function searchStudentsK43($key, $conn)
-{
-  $key = preg_replace('/(?<!\\\)([%_])/', '\\\$1', $key);
-
-  $sql = "SELECT * FROM students43
-            WHERE CAST(student_id AS CHAR) LIKE ?
-               OR admission_num LIKE ?
-               OR mssv LIKE ?
-               OR fname LIKE ?
-               OR lname LIKE ?
-               OR status = ?
-               OR note LIKE ?
-               OR CONCAT(fname, ' ', lname) LIKE ?";
-  $stmt = $conn->prepare($sql);
-  $stmt->execute([$key, $key, $key, $key, $key, $key, $key, $key]);
+  $stmt->execute([$key_like, $key_exact, $key_like, $key_exact, $key_like]);
 
   return $stmt->fetchAll(PDO::FETCH_ASSOC); // Trả về tất cả kết quả
 }

@@ -14,7 +14,8 @@ if (
             isset($_POST['course']) &&
             isset($_POST['gender']) &&
             isset($_POST['status']) &&
-            isset($_POST['note'])
+            isset($_POST['note']) &&
+            isset($_POST['note_special'])
         ) {
 
             include '../../DB_connection.php';
