@@ -49,7 +49,7 @@ if (
             include "inc/navbar.php";
             if ($students != 0) {
             ?>
-                <div class="mt-5" style="max-width: 1600px;">
+                <div class="mt-5">
                     <nav style="display: flex; align-items: flex-start; justify-content: space-evenly;">
                         <table class="table" style="border-collapse: collapse; width: 30%; margin-bottom: 2rem;">
                             <thead>
@@ -79,11 +79,11 @@ if (
                             echo "<table class='table' style='border-collapse: collapse; width: 30%; margin-bottom: 2rem;'>";
                             echo
                             "<thead>
-                <tr>
-                  <th style='border: 1px solid #ddd; padding: 8px;'>Tình trạng</th>
-                  <th style='border: 1px solid #ddd; padding: 8px;'>Số lượng (Sinh viên)</th>
-                </tr>
-              </thead>"; // Tiêu đề bảng
+                                <tr>
+                                <th style='border: 1px solid #ddd; padding: 8px;'>Tình trạng</th>
+                                <th style='border: 1px solid #ddd; padding: 8px;'>Số lượng (Sinh viên)</th>
+                                </tr>
+                            </thead>"; // Tiêu đề bảng
 
                             foreach ($result1 as $row) {
                                 echo "<tr>";
@@ -102,9 +102,9 @@ if (
                                 <a href="#" class="btn btn-success mt-3">Export Excel</a>
                             </div>
 
-                            <a href="student-add.php" class="btn btn-dark mt-3">Thêm sinh viên mới</a>
+                            <a href="k1-student-add.php" class="btn btn-dark mt-3">Thêm sinh viên mới</a>
 
-                            <form action="student-search.php" class="n-table" method="get" style="width: 100%;">
+                            <form action="k1-student-search.php" class="n-table" method="get" style="width: 100%;">
                                 <div class="input-group mb-3">
                                     <input type="text" class="form-control" name="searchKey" placeholder="Search...">
                                     <button class="btn btn-primary">
@@ -152,44 +152,44 @@ if (
                     if ($students_paginated) {
                         echo "<table class='table table-bordered mt-3 n-table table-striped table-hover' style='max-width: 1600px;'>";
                         echo "<thead>
-                  <tr style='text-align: center;'>
-                    <th scope='col'>STT</th>
-                    <th scope='col'>ID Nhập học</th>
-                    <th scope='col'>MSSV</th>
-                    <th scope='col'>Họ và tên</th>
-                    <th scope='col'>Ngày sinh</th>
-                    <th scope='col'>Khoá học</th>
-                    <th scope='col'>Khoá gốc</th>
-                    <th scope='col'>Mã hồ sơ</th>
-                    <th scope='col'>Số vào sổ</th>
-                    <th scope='col'>Ngày tốt nghiệp</th>
-                    <th scope='col'>Tình trạng</th>
-                    <th scope='col'>Lý do <br> (đã rút hồ sơ)</th>
-                    <th scope='col'>Ghi chú</th>
-                    <th scope='col'>Action</th>
-                  </tr>
-                </thead>";
+                                    <tr style='text-align: center;'>
+                                        <th scope='col'>STT</th>
+                                        <th scope='col'>ID Nhập học</th>
+                                        <th scope='col'>MSSV</th>
+                                        <th scope='col'>Họ và tên</th>
+                                        <th scope='col'>Ngày sinh</th>
+                                        <th scope='col'>Khoá học</th>
+                                        <th scope='col'>Khoá gốc</th>
+                                        <th scope='col'>Mã hồ sơ</th>
+                                        <th scope='col'>Số vào sổ</th>
+                                        <th scope='col'>Ngày tốt nghiệp</th>
+                                        <th scope='col'>Tình trạng</th>
+                                        <th scope='col'>Lý do <br> (đã rút hồ sơ)</th>
+                                        <th scope='col'>Ghi chú</th>
+                                        <th scope='col'>Action</th>
+                                    </tr>
+                                </thead>";
                         echo "<tbody>";
                         foreach ($students_paginated as $student) {
                             echo "<tr>
-                      <td style='text-align: center;border: 1px solid #ddd; padding: 8px;'>{$student['student_id']}</td>
-                      <td style='text-align: center;border: 1px solid #ddd; padding: 8px;'>{$student['admission_num']}</td>
-                      <td style='text-align: center;border: 1px solid #ddd; padding: 8px;'>{$student['mssv']}</td>
-                      <td style='text-align: center;border: 1px solid #ddd; padding: 8px;'><a href='student-view.php?student_id={$student['student_id']}' style='text-decoration: none; text-transform: capitalize; color: #007bff'>{$student['fname']}</a></td>
-                      <td style='text-align: center;'>" . date('d-m-Y', strtotime($student['date_of_birth'])) . "</td>
-                      <td style='text-align: center;border: 1px solid #ddd; padding: 8px;'>{$student['course']}</td>
-                      <td style='text-align: center;border: 1px solid #ddd; padding: 8px;'>{$student['course_ori']}</td>
-                      <td style='text-align: center;border: 1px solid #ddd; padding: 8px;'>{$student['profile_num']}</td>
-                      <td style='text-align: center;border: 1px solid #ddd; padding: 8px;'>{$student['bookgraduate_num']}</td>
-                      <td style='text-align: center;border: 1px solid #ddd; padding: 8px;'>" . (!empty($student['date_graduate']) ? date('d-m-Y', strtotime($student['date_graduate'])) : '') . "</td>
-                      <td style='text-align: center;border: 1px solid #ddd; padding: 8px;'>{$student['status']}</td>
-                      <td style='text-align: center;border: 1px solid #ddd; padding: 8px;'>{$student['note']}</td>
-                      <td style='text-align: center;border: 1px solid #ddd; padding: 8px; white-space: nowrap; overflow: hidden;text-overflow: ellipsis;max-width: 160px;'>{$student['note_special']}</td>
-                      <td style='display: flex; align-items: center; justify-content: space-evenly; border-right: 1px solid #ddd; padding: 8px;'>
-                        <a href='student-edit.php?student_id={$student['student_id']}' class='btn btn-warning'>Edit</a>
-                        <a href='student-delete.php?student_id={$student['student_id']}' class='btn btn-danger'>Delete</a>
-                      </td>
-                  </tr>";
+                                    <td style='text-align: center;border: 1px solid #ddd; padding: 8px;'>{$student['student_id']}</td>
+                                    <td style='text-align: center;border: 1px solid #ddd; padding: 8px;'>{$student['admission_num']}</td>
+                                    <td style='text-align: center;border: 1px solid #ddd; padding: 8px;'>{$student['mssv']}</td>
+                                    <td style='text-align: center;border: 1px solid #ddd; padding: 8px;'><a href='k1-student-view.php?student_id={$student['student_id']}' style='text-decoration: none; text-transform: capitalize; color: #007bff'>{$student['fname']}</a></td>
+                                    <td style='text-align: center;'>" . date('d-m-Y', strtotime($student['date_of_birth'])) . "</td>
+                                    <td style='text-align: center;border: 1px solid #ddd; padding: 8px;'>{$student['course']}</td>
+                                    <td style='text-align: center;border: 1px solid #ddd; padding: 8px;'>{$student['course_ori']}</td>
+                                    <td style='text-align: center;border: 1px solid #ddd; padding: 8px;'>{$student['profile_num']}</td>
+                                    <td style='text-align: center;border: 1px solid #ddd; padding: 8px;'>{$student['bookgraduate_num']}</td>
+                                    <td style='text-align: center;border: 1px solid #ddd; padding: 8px;'>" . (!empty($student['date_graduate']) ? date('d-m-Y', strtotime($student['date_graduate'])) : '') . "</td>
+                                    <td style='text-align: center;border: 1px solid #ddd; padding: 8px;'>{$student['status']}</td>
+                                    <td style='text-align: center;border: 1px solid #ddd; padding: 8px;'>{$student['note']}</td>
+                                    <td style='text-align: center;border: 1px solid #ddd; padding: 8px; white-space: nowrap; overflow: hidden;text-overflow: ellipsis;max-width: 160px;'>{$student['note_special']}</td>
+                                    <td style='display: flex; align-items: center; justify-content: space-evenly; border-right: 1px solid #ddd; padding: 8px;'>
+                                        <a href='k1-student-edit.php?student_id={$student['student_id']}' class='btn btn-warning'>Edit</a>
+                                        <a href='k1-student-delete.php?student_id={$student['student_id']}' class='btn btn-danger'>Delete</a>
+                                    </td>
+                                </tr>";
                         }
                         echo "</tbody>";
                         echo "</table>";

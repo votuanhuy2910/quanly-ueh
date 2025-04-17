@@ -143,7 +143,7 @@ if (
             <script>
                 document.addEventListener("DOMContentLoaded", function() {
                     // const navLinks = document.querySelectorAll("#navLinks li:nth-child(2) a");
-                    const navLinks = document.querySelectorAll("#navLinks a:nth-child(2)");
+                    const navLinks = document.querySelectorAll("#navLinks a:nth-child(3)");
                     if (navLinks.length > 0) {
                         navLinks[0].classList.add('active');
                     }

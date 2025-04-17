@@ -347,7 +347,7 @@ function getStudentById7($id, $conn)
   }
 }
 
-function getStudentByIdK8($id, $conn)
+function getStudentById8($id, $conn)
 {
   $sql = "SELECT * FROM students8
            WHERE student_id=?";
@@ -616,9 +616,9 @@ function searchStudents($key, $conn)
   $key_exact = $key;
 
   $sql = "SELECT * FROM students
-            WHERE admission_num = ?
+            WHERE admission_num LIKE ?
                 OR mssv = ?
-                OR fname = ?
+                OR fname LIKE ?
                 OR status = ?
                 OR note LIKE ?";
 
@@ -636,10 +636,10 @@ function searchStudents1($key, $conn)
   $key_like = "%$key_escaped%";
   $key_exact = $key;
 
-  $sql = "SELECT * FROM students1
-            WHERE admission_num = ?
+  $sql = "SELECT * FROM students
+            WHERE admission_num LIKE ?
                 OR mssv = ?
-                OR fname = ?
+                OR fname LIKE ?
                 OR status = ?
                 OR note LIKE ?";
 
@@ -657,10 +657,10 @@ function searchStudents2($key, $conn)
   $key_like = "%$key_escaped%";
   $key_exact = $key;
 
-  $sql = "SELECT * FROM students2
-            WHERE admission_num = ?
+  $sql = "SELECT * FROM students
+            WHERE admission_num LIKE ?
                 OR mssv = ?
-                OR fname = ?
+                OR fname LIKE ?
                 OR status = ?
                 OR note LIKE ?";
 
@@ -678,10 +678,10 @@ function searchStudents3($key, $conn)
   $key_like = "%$key_escaped%";
   $key_exact = $key;
 
-  $sql = "SELECT * FROM students3
-            WHERE admission_num = ?
+  $sql = "SELECT * FROM students
+            WHERE admission_num LIKE ?
                 OR mssv = ?
-                OR fname = ?
+                OR fname LIKE ?
                 OR status = ?
                 OR note LIKE ?";
 
@@ -699,10 +699,10 @@ function searchStudents4($key, $conn)
   $key_like = "%$key_escaped%";
   $key_exact = $key;
 
-  $sql = "SELECT * FROM students4
-            WHERE admission_num = ?
+  $sql = "SELECT * FROM students
+            WHERE admission_num LIKE ?
                 OR mssv = ?
-                OR fname = ?
+                OR fname LIKE ?
                 OR status = ?
                 OR note LIKE ?";
 
@@ -720,10 +720,10 @@ function searchStudents5($key, $conn)
   $key_like = "%$key_escaped%";
   $key_exact = $key;
 
-  $sql = "SELECT * FROM students5
-            WHERE admission_num = ?
+  $sql = "SELECT * FROM students
+            WHERE admission_num LIKE ?
                 OR mssv = ?
-                OR fname = ?
+                OR fname LIKE ?
                 OR status = ?
                 OR note LIKE ?";
 
@@ -741,10 +741,10 @@ function searchStudents6($key, $conn)
   $key_like = "%$key_escaped%";
   $key_exact = $key;
 
-  $sql = "SELECT * FROM students6
-            WHERE admission_num = ?
+  $sql = "SELECT * FROM students
+            WHERE admission_num LIKE ?
                 OR mssv = ?
-                OR fname = ?
+                OR fname LIKE ?
                 OR status = ?
                 OR note LIKE ?";
 
@@ -762,10 +762,10 @@ function searchStudents7($key, $conn)
   $key_like = "%$key_escaped%";
   $key_exact = $key;
 
-  $sql = "SELECT * FROM students7
-            WHERE admission_num = ?
+  $sql = "SELECT * FROM students
+            WHERE admission_num LIKE ?
                 OR mssv = ?
-                OR fname = ?
+                OR fname LIKE ?
                 OR status = ?
                 OR note LIKE ?";
 
@@ -783,10 +783,10 @@ function searchStudents8($key, $conn)
   $key_like = "%$key_escaped%";
   $key_exact = $key;
 
-  $sql = "SELECT * FROM students8
-            WHERE admission_num = ?
+  $sql = "SELECT * FROM students
+            WHERE admission_num LIKE ?
                 OR mssv = ?
-                OR fname = ?
+                OR fname LIKE ?
                 OR status = ?
                 OR note LIKE ?";
 
